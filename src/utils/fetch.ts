@@ -107,7 +107,7 @@ const createSmoothMessage = (params: { onTextUpdate: (delta: string, text: strin
 
   // define startAnimation function to display the text in buffer smooth
   // when you need to start the animation, call this function
-  const startAnimation = (speed = 2) =>
+  const startAnimation = (speed = 20) =>
     new Promise<void>((resolve) => {
       if (isAnimationActive) {
         resolve();
@@ -135,7 +135,7 @@ const createSmoothMessage = (params: { onTextUpdate: (delta: string, text: strin
           params.onTextUpdate(charsToAdd, buffer);
 
           // 设置下一个字符的延迟
-          animationTimeoutId = setTimeout(updateText, 0.1); // 16 毫秒的延迟模拟打字机效果
+          animationTimeoutId = setTimeout(updateText, 1); // 16 毫秒的延迟模拟打字机效果
         } else {
           // 当所有字符都显示完毕时，清除动画状态
           isAnimationActive = false;
@@ -180,7 +180,7 @@ const createSmoothToolCalls = (params: {
     }
   };
 
-  const startAnimation = (index: number, speed = 2) =>
+  const startAnimation = (index: number, speed = 20) =>
     new Promise<void>((resolve) => {
       if (isAnimationActives[index]) {
         resolve();
@@ -206,7 +206,7 @@ const createSmoothToolCalls = (params: {
             params.onToolCallsUpdate(toolCallsBuffer, [...isAnimationActives]);
           }
 
-          animationTimeoutIds[index] = setTimeout(updateToolCall, 0.1);
+          animationTimeoutIds[index] = setTimeout(updateToolCall, 16);
         } else {
           isAnimationActives[index] = false;
           animationTimeoutIds[index] = null;
@@ -234,7 +234,7 @@ const createSmoothToolCalls = (params: {
     });
   };
 
-  const startAnimations = async (speed = 2) => {
+  const startAnimations = async (speed = 20) => {
     const pools = toolCallsBuffer.map(async (_, index) => {
       if (outputQueues[index].length > 0 && !isAnimationActives[index]) {
         await startAnimation(index, speed);
@@ -396,3 +396,36 @@ export const fetchSSE = async (url: string, options: RequestInit & FetchSSEOptio
 
   return response;
 };
+
+
+function spliceByWords(text: string, speed: number): [string, string] {
+  let result: string = '';
+  let wordBuffer: string = '';
+  let charCount: number = 0;
+
+  for (let i: number = 0; i < text.length; i++) {
+    const char: string = text[i];
+
+    if (/\s/.test(char)) {
+      // 如果是空白字符，直接添加到结果中
+      result += wordBuffer + char;
+      wordBuffer = '';
+      charCount++;
+    } else if (/[\u4e00-\u9fa5]/.test(char)) {
+      // 如果是中文字符，直接添加到结果中
+      result += char;
+      charCount++;
+    } else {
+      // 如果是英文字符，添加到单词缓冲区
+      wordBuffer += char;
+    }
+
+    // 如果达到了速度限制或者到达了文本末尾，将剩余的单词缓冲区添加到结果中
+    if (charCount >= speed || i === text.length - 1) {
+      result += wordBuffer;
+      break;
+    }
+  }
+
+  return [result, text.slice(result.length)];
+}
