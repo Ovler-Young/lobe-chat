@@ -135,7 +135,7 @@ const createSmoothMessage = (params: { onTextUpdate: (delta: string, text: strin
           params.onTextUpdate(charsToAdd, buffer);
 
           // 设置下一个字符的延迟
-          animationTimeoutId = setTimeout(updateText, 16); // 16 毫秒的延迟模拟打字机效果
+          animationTimeoutId = setTimeout(updateText, 2); // 16 毫秒的延迟模拟打字机效果
         } else {
           // 当所有字符都显示完毕时，清除动画状态
           isAnimationActive = false;
@@ -206,7 +206,7 @@ const createSmoothToolCalls = (params: {
             params.onToolCallsUpdate(toolCallsBuffer, [...isAnimationActives]);
           }
 
-          animationTimeoutIds[index] = setTimeout(updateToolCall, 16);
+          animationTimeoutIds[index] = setTimeout(updateToolCall, 2);
         } else {
           isAnimationActives[index] = false;
           animationTimeoutIds[index] = null;
