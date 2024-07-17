@@ -396,36 +396,3 @@ export const fetchSSE = async (url: string, options: RequestInit & FetchSSEOptio
 
   return response;
 };
-
-
-function spliceByWords(text: string, speed: number): [string, string] {
-  let result: string = '';
-  let wordBuffer: string = '';
-  let charCount: number = 0;
-
-  for (let i: number = 0; i < text.length; i++) {
-    const char: string = text[i];
-
-    if (/\s/.test(char)) {
-      // 如果是空白字符，直接添加到结果中
-      result += wordBuffer + char;
-      wordBuffer = '';
-      charCount++;
-    } else if (/[\u4e00-\u9fa5]/.test(char)) {
-      // 如果是中文字符，直接添加到结果中
-      result += char;
-      charCount++;
-    } else {
-      // 如果是英文字符，添加到单词缓冲区
-      wordBuffer += char;
-    }
-
-    // 如果达到了速度限制或者到达了文本末尾，将剩余的单词缓冲区添加到结果中
-    if (charCount >= speed || i === text.length - 1) {
-      result += wordBuffer;
-      break;
-    }
-  }
-
-  return [result, text.slice(result.length)];
-}
