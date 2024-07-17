@@ -39,3 +39,9 @@ jobs:
           git checkout -B faster-upstream origin/faster
           git rebase upstream/main
           git push origin faster-upstream --force
+
+      - name: Update main branch
+        run: |
+          git checkout  -B main origin/main
+          git rebase upstream/main
+          git push origin main --force
