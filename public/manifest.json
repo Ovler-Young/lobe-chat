@@ -1,6 +1,6 @@
 {
   "background_color": "#000000",
-  "cache_busting_mode": "all",
+  "cache_busting_mode": "none",
   "categories": ["productivity", "design", "development", "education"],
   "description": "Personal LLM productivity tool, brings you the best user experience of ChatGPT, OLLaMA, Gemini, Claude WebUI. Customize AI assistant features flexibly according to personalized needs to solve problems, enhance productivity, and explore future workflow in LobeChat.",
   "display": "standalone",

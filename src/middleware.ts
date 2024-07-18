@@ -12,7 +12,7 @@ export const config = {
     '/(api|trpc)(.*)',
     // include the /
     '/',
-    '/chat(.*)',
+    // '/chat(.*)',
     '/settings(.*)',
     // ↓ cloud ↓
   ],
