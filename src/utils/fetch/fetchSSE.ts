@@ -64,7 +64,7 @@ const createSmoothMessage = (params: { onTextUpdate: (delta: string, text: strin
 
   // define startAnimation function to display the text in buffer smooth
   // when you need to start the animation, call this function
-  const startAnimation = (speed = 20) =>
+  const startAnimation = (speed = 80) =>
     new Promise<void>((resolve) => {
       if (isAnimationActive) {
         resolve();
@@ -137,7 +137,7 @@ const createSmoothToolCalls = (params: {
     }
   };
 
-  const startAnimation = (index: number, speed = 20) =>
+  const startAnimation = (index: number, speed = 80) =>
     new Promise<void>((resolve) => {
       if (isAnimationActives[index]) {
         resolve();
@@ -191,7 +191,7 @@ const createSmoothToolCalls = (params: {
     });
   };
 
-  const startAnimations = async (speed = 20) => {
+  const startAnimations = async (speed = 80) => {
     const pools = toolCallsBuffer.map(async (_, index) => {
       if (outputQueues[index].length > 0 && !isAnimationActives[index]) {
         await startAnimation(index, speed);
