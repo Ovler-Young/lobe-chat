@@ -107,7 +107,7 @@ const createSmoothMessage = (params: { onTextUpdate: (delta: string, text: strin
 
   // define startAnimation function to display the text in buffer smooth
   // when you need to start the animation, call this function
-  const startAnimation = (speed = 80) =>
+  const startAnimation = (speed = 1000) =>
     new Promise<void>((resolve) => {
       if (isAnimationActive) {
         resolve();
@@ -135,7 +135,7 @@ const createSmoothMessage = (params: { onTextUpdate: (delta: string, text: strin
           params.onTextUpdate(charsToAdd, buffer);
 
           // 设置下一个字符的延迟
-          animationTimeoutId = setTimeout(updateText, 1); // 16 毫秒的延迟模拟打字机效果
+          animationTimeoutId = setTimeout(updateText, 16); // 16 毫秒的延迟模拟打字机效果
         } else {
           // 当所有字符都显示完毕时，清除动画状态
           isAnimationActive = false;
@@ -180,7 +180,7 @@ const createSmoothToolCalls = (params: {
     }
   };
 
-  const startAnimation = (index: number, speed = 80) =>
+  const startAnimation = (index: number, speed = 800) =>
     new Promise<void>((resolve) => {
       if (isAnimationActives[index]) {
         resolve();
@@ -234,7 +234,7 @@ const createSmoothToolCalls = (params: {
     });
   };
 
-  const startAnimations = async (speed = 80) => {
+  const startAnimations = async (speed = 800) => {
     const pools = toolCallsBuffer.map(async (_, index) => {
       if (outputQueues[index].length > 0 && !isAnimationActives[index]) {
         await startAnimation(index, speed);
