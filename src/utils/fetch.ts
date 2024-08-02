@@ -91,6 +91,7 @@ const createSmoothMessage = (params: { onTextUpdate: (delta: string, text: strin
   let buffer = '';
   let outputQueue: string[] = [];
 
+  // eslint-disable-next-line no-undef
   let animationTimeoutId: NodeJS.Timeout | null = null;
   let isAnimationActive = false;
 
@@ -155,6 +156,7 @@ const createSmoothToolCalls = (params: {
 }) => {
   let toolCallsBuffer: MessageToolCall[] = [];
 
+  // eslint-disable-next-line no-undef
   const animationTimeoutIds: (NodeJS.Timeout | null)[] = [];
   const outputQueues: string[][] = [];
   const isAnimationActives: boolean[] = [];
