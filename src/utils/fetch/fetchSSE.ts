@@ -46,14 +46,11 @@ export interface FetchSSEOptions {
 
 const createSmoothMessage = (params: { onTextUpdate: (delta: string, text: string) => void }) => {
   let buffer = '';
-  // why use queue: https://shareg.pt/GLBrjpK
   let outputQueue: string[] = [];
 
-  // eslint-disable-next-line no-undef
   let animationTimeoutId: NodeJS.Timeout | null = null;
   let isAnimationActive = false;
 
-  // when you need to stop the animation, call this function
   const stopAnimation = () => {
     isAnimationActive = false;
     if (animationTimeoutId !== null) {
@@ -62,8 +59,6 @@ const createSmoothMessage = (params: { onTextUpdate: (delta: string, text: strin
     }
   };
 
-  // define startAnimation function to display the text in buffer smooth
-  // when you need to start the animation, call this function
   const startAnimation = (speed = 1000) =>
     new Promise<void>((resolve) => {
       if (isAnimationActive) {
@@ -74,27 +69,22 @@ const createSmoothMessage = (params: { onTextUpdate: (delta: string, text: strin
       isAnimationActive = true;
 
       const updateText = () => {
-        // 如果动画已经不再激活，则停止更新文本
         if (!isAnimationActive) {
           clearTimeout(animationTimeoutId!);
           animationTimeoutId = null;
           resolve();
+          return;
         }
 
-        // 如果还有文本没有显示
-        // 检查队列中是否有字符待显示
         if (outputQueue.length > 0) {
-          // 从队列中获取前两个字符（如果存在）
-          const charsToAdd = outputQueue.splice(0, speed).join('');
-          buffer += charsToAdd;
+          const textToAdd = outputQueue.join('');
+          buffer += textToAdd;
+          outputQueue = [];
 
-          // 更新消息内容，这里可能需要结合实际情况调整
-          params.onTextUpdate(charsToAdd, buffer);
+          params.onTextUpdate(textToAdd, buffer);
 
-          // 设置下一个字符的延迟
-          animationTimeoutId = setTimeout(updateText, 16); // 16 毫秒的延迟模拟打字机效果
+          animationTimeoutId = setTimeout(updateText, speed);
         } else {
-          // 当所有字符都显示完毕时，清除动画状态
           isAnimationActive = false;
           animationTimeoutId = null;
           resolve();
@@ -105,7 +95,7 @@ const createSmoothMessage = (params: { onTextUpdate: (delta: string, text: strin
     });
 
   const pushToQueue = (text: string) => {
-    outputQueue.push(...text.split(''));
+    outputQueue.push(text);
   };
 
   return {
@@ -122,9 +112,6 @@ const createSmoothToolCalls = (params: {
 }) => {
   let toolCallsBuffer: MessageToolCall[] = [];
 
-  // 为每个 tool_call 维护一个输出队列和动画控制器
-
-  // eslint-disable-next-line no-undef
   const animationTimeoutIds: (NodeJS.Timeout | null)[] = [];
   const outputQueues: string[][] = [];
   const isAnimationActives: boolean[] = [];
@@ -149,21 +136,21 @@ const createSmoothToolCalls = (params: {
       const updateToolCall = () => {
         if (!isAnimationActives[index]) {
           resolve();
+          return;
         }
 
         if (outputQueues[index].length > 0) {
-          const charsToAdd = outputQueues[index].splice(0, speed).join('');
+          const textToAdd = outputQueues[index].join('');
+          outputQueues[index] = [];
 
           const toolCallToUpdate = toolCallsBuffer[index];
 
           if (toolCallToUpdate) {
-            toolCallToUpdate.function.arguments += charsToAdd;
-
-            // 触发 ui 更新
+            toolCallToUpdate.function.arguments += textToAdd;
             params.onToolCallsUpdate(toolCallsBuffer, [...isAnimationActives]);
           }
 
-          animationTimeoutIds[index] = setTimeout(updateToolCall, 16);
+          animationTimeoutIds[index] = setTimeout(updateToolCall, speed);
         } else {
           isAnimationActives[index] = false;
           animationTimeoutIds[index] = null;
@@ -176,7 +163,6 @@ const createSmoothToolCalls = (params: {
 
   const pushToQueue = (toolCallChunks: MessageToolCallChunk[]) => {
     toolCallChunks.forEach((chunk) => {
-      // init the tool call buffer and output queue
       if (!toolCallsBuffer[chunk.index]) {
         toolCallsBuffer[chunk.index] = MessageToolCallSchema.parse(chunk);
       }
@@ -187,7 +173,7 @@ const createSmoothToolCalls = (params: {
         animationTimeoutIds[chunk.index] = null;
       }
 
-      outputQueues[chunk.index].push(...(chunk.function?.arguments || '').split(''));
+      outputQueues[chunk.index].push(chunk.function?.arguments || '');
     });
   };
 
@@ -200,6 +186,7 @@ const createSmoothToolCalls = (params: {
 
     await Promise.all(pools);
   };
+
   const stopAnimations = () => {
     toolCallsBuffer.forEach((_, index) => {
       stopAnimation(index);
@@ -208,7 +195,7 @@ const createSmoothToolCalls = (params: {
 
   return {
     isAnimationActives,
-    isTokenRemain: () => outputQueues.some((token) => token.length > 0),
+    isTokenRemain: () => outputQueues.some((queue) => queue.length > 0),
     pushToQueue,
     startAnimations,
     stopAnimations,
