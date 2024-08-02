@@ -133,7 +133,7 @@ const OpenAI: ModelProviderCard = {
     },
     {
       description: 'g-4o',
-      displayName: 'GPT-4o',
+      displayName: 'g-GPT-4o',
       enabled: true,
       functionCall: true,
       id: 'g-gpt-4o',
@@ -142,7 +142,7 @@ const OpenAI: ModelProviderCard = {
     },
     {
       description: 'reverse engeneered 4o',
-      displayName: 'GPT-4o',
+      displayName: 'n-GPT-4o',
       enabled: true,
       functionCall: true,
       id: 'n-gpt-4o',
@@ -151,7 +151,7 @@ const OpenAI: ModelProviderCard = {
     },
     {
       description: 'gpt-4o-all, fixed price',
-      displayName: 'GPT-4o',
+      displayName: 'GPT-4o-all',
       enabled: true,
       functionCall: true,
       id: 'gpt-4o-all',
