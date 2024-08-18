@@ -213,12 +213,6 @@ export default {
     },
     model: {
       desc: '{{provider}} 模型',
-      list: {
-        'gpt-3.5-turbo': 'GPT 3.5',
-        'gpt-3.5-turbo-16k': 'GPT 3.5 (16K)',
-        'gpt-4': 'GPT 4',
-        'gpt-4-32k': 'GPT 4 (32K)',
-      },
       title: '模型',
     },
     presencePenalty: {
@@ -380,6 +374,11 @@ export default {
       label: '助理元数据生成模型',
       modelDesc: '指定用于生成助理名称、描述、头像、标签的模型',
       title: '自动生成助理信息',
+    },
+    queryRewrite: {
+      label: '提问重写模型',
+      modelDesc: '指定用于优化用户提问的模型',
+      title: '知识库',
     },
     title: '系统助手',
     topic: {

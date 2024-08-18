@@ -210,12 +210,6 @@
     },
     "model": {
       "desc": "{{provider}} model",
-      "list": {
-        "gpt-3.5-turbo": "GPT 3.5",
-        "gpt-3.5-turbo-16k": "GPT 3.5 (16K)",
-        "gpt-4": "GPT 4",
-        "gpt-4-32k": "GPT 4 (32K)"
-      },
       "title": "Model"
     },
     "presencePenalty": {
@@ -377,6 +371,11 @@
       "label": "Model generowania metadanych asystenta",
       "modelDesc": "Określa model używany do generowania nazwy, opisu, awatara i etykiety asystenta",
       "title": "Automatyczne generowanie informacji o asystencie"
+    },
+    "queryRewrite": {
+      "label": "Model przekształcania zapytań",
+      "modelDesc": "Model używany do optymalizacji zapytań użytkowników",
+      "title": "Baza wiedzy"
     },
     "title": "Asystent Systemowy",
     "topic": {

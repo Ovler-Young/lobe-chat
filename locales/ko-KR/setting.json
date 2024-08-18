@@ -210,12 +210,6 @@
     },
     "model": {
       "desc": "{{provider}} 모델",
-      "list": {
-        "gpt-3.5-turbo": "GPT 3.5",
-        "gpt-3.5-turbo-16k": "GPT 3.5 (16K)",
-        "gpt-4": "GPT 4",
-        "gpt-4-32k": "GPT 4 (32K)"
-      },
       "title": "모델"
     },
     "presencePenalty": {
@@ -377,6 +371,11 @@
       "label": "어시스턴트 메타 생성 모델",
       "modelDesc": "어시스턴트 이름, 설명, 프로필 이미지, 레이블을 생성하는 데 사용되는 모델을 지정합니다.",
       "title": "어시스턴트 정보 자동 생성"
+    },
+    "queryRewrite": {
+      "label": "질문 재작성 모델",
+      "modelDesc": "사용자의 질문을 최적화하는 데 사용되는 모델 지정",
+      "title": "지식 베이스"
     },
     "title": "시스템 도우미",
     "topic": {

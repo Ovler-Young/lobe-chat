@@ -210,12 +210,6 @@
     },
     "model": {
       "desc": "{{provider}}モデル",
-      "list": {
-        "gpt-3.5-turbo": "GPT 3.5",
-        "gpt-3.5-turbo-16k": "GPT 3.5 (16K)",
-        "gpt-4": "GPT 4",
-        "gpt-4-32k": "GPT 4 (32K)"
-      },
       "title": "モデル"
     },
     "presencePenalty": {
@@ -377,6 +371,11 @@
       "label": "アシスタントメタデータ生成モデル",
       "modelDesc": "アシスタントの名前、説明、アバター、ラベルを生成するために指定されたモデル",
       "title": "アシスタント情報の自動生成"
+    },
+    "queryRewrite": {
+      "label": "質問リライトモデル",
+      "modelDesc": "ユーザーの質問を最適化するために指定されたモデル",
+      "title": "知識ベース"
     },
     "title": "システムアシスタント",
     "topic": {

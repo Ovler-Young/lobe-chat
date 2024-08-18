@@ -210,12 +210,6 @@
     },
     "model": {
       "desc": "Modèle {{provider}}",
-      "list": {
-        "gpt-3.5-turbo": "GPT 3.5",
-        "gpt-3.5-turbo-16k": "GPT 3.5 (16K)",
-        "gpt-4": "GPT 4",
-        "gpt-4-32k": "GPT 4 (32K)"
-      },
       "title": "Modèle"
     },
     "presencePenalty": {
@@ -377,6 +371,11 @@
       "label": "Modèle de génération de métadonnées d'assistant",
       "modelDesc": "Modèle spécifié pour générer le nom, la description, l'avatar et les balises de l'assistant",
       "title": "Génération automatique des informations de l'assistant"
+    },
+    "queryRewrite": {
+      "label": "Modèle de reformulation des questions",
+      "modelDesc": "Modèle utilisé pour optimiser les questions des utilisateurs",
+      "title": "Base de connaissances"
     },
     "title": "Agent système",
     "topic": {

@@ -210,12 +210,6 @@
     },
     "model": {
       "desc": "{{provider}} 模型",
-      "list": {
-        "gpt-3.5-turbo": "GPT 3.5",
-        "gpt-3.5-turbo-16k": "GPT 3.5 (16K)",
-        "gpt-4": "GPT 4",
-        "gpt-4-32k": "GPT 4 (32K)"
-      },
       "title": "模型"
     },
     "presencePenalty": {
@@ -377,6 +371,11 @@
       "label": "助理元數據生成模型",
       "modelDesc": "指定用於生成助理名稱、描述、頭像、標籤的模型",
       "title": "自動生成助理資訊"
+    },
+    "queryRewrite": {
+      "label": "提問重寫模型",
+      "modelDesc": "指定用於優化用戶提問的模型",
+      "title": "知識庫"
     },
     "title": "系統助手",
     "topic": {
