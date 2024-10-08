@@ -1,0 +1,43 @@
+name: Sync Faster-Upstream Branch
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+    branches:
+      - newfaster
+  push:
+    branches:
+      - newfaster
+  workflow_dispatch:
+
+jobs:
+  sync-faster-upstream:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+      - name: Fetch all branches
+        run: |
+          git fetch --all
+      - name: Fetch upstream changes
+        run: |
+          git remote add upstream https://github.com/lobehub/lobe-chat.git
+          git fetch upstream main
+      - name: Update main branch
+        run: |
+          git checkout  -B main origin/main
+          git rebase upstream/main
+          git push origin main --force
+      - name: Update newfaster-upstream branch
+        run: |
+          git checkout -B newfaster-upstream origin/newfaster
+          git rebase upstream/main
+          git push origin newfaster-upstream --force
