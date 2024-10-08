@@ -4,12 +4,11 @@ import { ModelProviderCard } from '@/types/llm';
 const OpenAI: ModelProviderCard = {
   chatModels: [
     {
-      description:
-        'o1-mini是一款针对编程、数学和科学应用场景而设计的快速、经济高效的推理模型。该模型具有128K上下文和2023年10月的知识截止日期。',
-      displayName: 'OpenAI o1-mini',
+      description: 'gpt-o1-mini, fixed price',
+      displayName: 'OpenAI o1-mini Fixed Price',
       enabled: true,
-      id: 'o1-mini',
-      maxOutput: 65_536,
+      id: 'o1-mini-all',
+      maxOutput: 32_768,
       pricing: {
         input: 3,
         output: 12,
@@ -18,11 +17,10 @@ const OpenAI: ModelProviderCard = {
       tokens: 128_000,
     },
     {
-      description:
-        'o1是OpenAI新的推理模型，适用于需要广泛通用知识的复杂任务。该模型具有128K上下文和2023年10月的知识截止日期。',
-      displayName: 'OpenAI o1-preview',
+      description: 'gpt-o1-priview, fixed price',
+      displayName: 'OpenAI o1-preview Fixed Price',
       enabled: true,
-      id: 'o1-preview',
+      id: 'o1-preview-all',
       maxOutput: 32_768,
       pricing: {
         input: 15,
@@ -57,6 +55,15 @@ const OpenAI: ModelProviderCard = {
         input: 5,
         output: 15,
       },
+      tokens: 128_000,
+      vision: true,
+    },
+    {
+      description: 'gpt-4o-all, fixed price',
+      displayName: 'GPT-4o-all',
+      enabled: true,
+      functionCall: true,
+      id: 'gpt-4o-all',
       tokens: 128_000,
       vision: true,
     },
