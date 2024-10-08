@@ -45,16 +45,7 @@ export interface FetchSSEOptions {
   smoothing?: SmoothingParams | boolean;
 }
 
-const START_ANIMATION_SPEED = 4;
-
-const END_ANIMATION_SPEED = 15;
-
-const createSmoothMessage = (params: {
-  onTextUpdate: (delta: string, text: string) => void;
-  startSpeed?: number;
-}) => {
-  const { startSpeed = START_ANIMATION_SPEED } = params;
-
+const createSmoothMessage = (params: { onTextUpdate: (delta: string, text: string) => void }) => {
   let buffer = '';
   // why use queue: https://shareg.pt/GLBrjpK
   let outputQueue: string[] = [];
@@ -72,7 +63,7 @@ const createSmoothMessage = (params: {
 
   // define startAnimation function to display the text in buffer smooth
   // when you need to start the animation, call this function
-  const startAnimation = (speed = startSpeed) =>
+  const startAnimation = () =>
     new Promise<void>((resolve) => {
       if (isAnimationActive) {
         resolve();
@@ -93,11 +84,10 @@ const createSmoothMessage = (params: {
         // 如果还有文本没有显示
         // 检查队列中是否有字符待显示
         if (outputQueue.length > 0) {
-          // 从队列中获取前 n 个字符（如果存在）
-          const charsToAdd = outputQueue.splice(0, speed).join('');
+          const charsToAdd = outputQueue.join('');
           buffer += charsToAdd;
+          outputQueue = [];
 
-          // 更新消息内容，这里可能需要结合实际情况调整
           params.onTextUpdate(charsToAdd, buffer);
         } else {
           // 当所有字符都显示完毕时，清除动画状态
@@ -114,7 +104,7 @@ const createSmoothMessage = (params: {
     });
 
   const pushToQueue = (text: string) => {
-    outputQueue.push(...text.split(''));
+    outputQueue.push(text);
   };
 
   return {
@@ -128,9 +118,7 @@ const createSmoothMessage = (params: {
 
 const createSmoothToolCalls = (params: {
   onToolCallsUpdate: (toolCalls: MessageToolCall[], isAnimationActives: boolean[]) => void;
-  startSpeed?: number;
 }) => {
-  const { startSpeed = START_ANIMATION_SPEED } = params;
   let toolCallsBuffer: MessageToolCall[] = [];
 
   // 为每个 tool_call 维护一个输出队列和动画控制器
@@ -147,7 +135,7 @@ const createSmoothToolCalls = (params: {
     }
   };
 
-  const startAnimation = (index: number, speed = startSpeed) =>
+  const startAnimation = (index: number) =>
     new Promise<void>((resolve) => {
       if (isAnimationActives[index]) {
         resolve();
@@ -163,8 +151,8 @@ const createSmoothToolCalls = (params: {
         }
 
         if (outputQueues[index].length > 0) {
-          const charsToAdd = outputQueues[index].splice(0, speed).join('');
-
+          const charsToAdd = outputQueues[index].join('');
+          outputQueues[index] = [];
           const toolCallToUpdate = toolCallsBuffer[index];
 
           if (toolCallToUpdate) {
@@ -198,14 +186,14 @@ const createSmoothToolCalls = (params: {
         animationFrameIds[chunk.index] = null;
       }
 
-      outputQueues[chunk.index].push(...(chunk.function?.arguments || '').split(''));
+      outputQueues[chunk.index].push(chunk.function?.arguments || '');
     });
   };
 
-  const startAnimations = async (speed = startSpeed) => {
+  const startAnimations = async () => {
     const pools = toolCallsBuffer.map(async (_, index) => {
       if (outputQueues[index].length > 0 && !isAnimationActives[index]) {
-        await startAnimation(index, speed);
+        await startAnimation(index);
       }
     });
 
@@ -243,21 +231,18 @@ export const fetchSSE = async (url: string, options: RequestInit & FetchSSEOptio
   const textSmoothing = typeof smoothing === 'boolean' ? smoothing : smoothing?.text;
   const toolsCallingSmoothing =
     typeof smoothing === 'boolean' ? smoothing : (smoothing?.toolsCalling ?? true);
-  const smoothingSpeed = typeof smoothing === 'object' ? smoothing.speed : undefined;
 
   const textController = createSmoothMessage({
     onTextUpdate: (delta, text) => {
       output = text;
       options.onMessageHandle?.({ text: delta, type: 'text' });
     },
-    startSpeed: smoothingSpeed,
   });
 
   const toolCallsController = createSmoothToolCalls({
     onToolCallsUpdate: (toolCalls, isAnimationActives) => {
       options.onMessageHandle?.({ isAnimationActives, tool_calls: toolCalls, type: 'tool_calls' });
     },
-    startSpeed: smoothingSpeed,
   });
 
   await fetchEventSource(url, {
@@ -380,11 +365,11 @@ export const fetchSSE = async (url: string, options: RequestInit & FetchSSEOptio
       const observationId = response.headers.get(LOBE_CHAT_OBSERVATION_ID);
 
       if (textController.isTokenRemain()) {
-        await textController.startAnimation(END_ANIMATION_SPEED);
+        await textController.startAnimation();
       }
 
       if (toolCallsController.isTokenRemain()) {
-        await toolCallsController.startAnimations(END_ANIMATION_SPEED);
+        await toolCallsController.startAnimations();
       }
 
       await options?.onFinish?.(output, { observationId, toolCalls, traceId, type: finishedType });
