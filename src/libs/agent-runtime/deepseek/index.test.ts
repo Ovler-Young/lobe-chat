@@ -12,7 +12,7 @@ import * as debugStreamModule from '../utils/debugStream';
 import { LobeDeepSeekAI } from './index';
 
 const provider = ModelProvider.DeepSeek;
-const defaultBaseURL = 'https://api.deepseek.com/v1';
+const defaultBaseURL = 'https://api.deepseek.com/beta';
 
 const bizErrorType = 'ProviderBizError';
 const invalidErrorType = 'InvalidProviderAPIKey';
