@@ -9,12 +9,17 @@ import { LobeAnthropicAI } from './anthropic';
 import { LobeAzureOpenAI } from './azureOpenai';
 import { LobeBaichuanAI } from './baichuan';
 import { LobeBedrockAI, LobeBedrockAIParams } from './bedrock';
+import { LobeCloudflareAI, LobeCloudflareParams } from './cloudflare';
 import { LobeDeepSeekAI } from './deepseek';
 import { LobeFireworksAI } from './fireworksai';
+import { LobeGiteeAI } from './giteeai';
 import { LobeGithubAI } from './github';
 import { LobeGoogleAI } from './google';
 import { LobeGroq } from './groq';
+import { LobeHigressAI } from './higress';
+import { LobeHuggingFaceAI } from './huggingface';
 import { LobeHunyuanAI } from './hunyuan';
+import { LobeInternLMAI } from './internlm';
 import { LobeMinimaxAI } from './minimax';
 import { LobeMistralAI } from './mistral';
 import { LobeMoonshotAI } from './moonshot';
@@ -24,6 +29,7 @@ import { LobeOpenAI } from './openai';
 import { LobeOpenRouterAI } from './openrouter';
 import { LobePerplexityAI } from './perplexity';
 import { LobeQwenAI } from './qwen';
+import { LobeSenseNovaAI } from './sensenova';
 import { LobeSiliconCloudAI } from './siliconcloud';
 import { LobeSparkAI } from './spark';
 import { LobeStepfunAI } from './stepfun';
@@ -39,6 +45,7 @@ import {
   TextToSpeechPayload,
 } from './types';
 import { LobeUpstageAI } from './upstage';
+import { LobeXAI } from './xai';
 import { LobeZeroOneAI } from './zeroone';
 import { LobeZhipuAI } from './zhipu';
 
@@ -129,12 +136,17 @@ class AgentRuntime {
       azure: { apiVersion?: string; apikey?: string; endpoint?: string };
       baichuan: Partial<ClientOptions>;
       bedrock: Partial<LobeBedrockAIParams>;
+      cloudflare: Partial<LobeCloudflareParams>;
       deepseek: Partial<ClientOptions>;
       fireworksai: Partial<ClientOptions>;
+      giteeai: Partial<ClientOptions>;
       github: Partial<ClientOptions>;
       google: { apiKey?: string; baseURL?: string };
       groq: Partial<ClientOptions>;
+      higress: Partial<ClientOptions>;
+      huggingface: { apiKey?: string; baseURL?: string };
       hunyuan: Partial<ClientOptions>;
+      internlm: Partial<ClientOptions>;
       minimax: Partial<ClientOptions>;
       mistral: Partial<ClientOptions>;
       moonshot: Partial<ClientOptions>;
@@ -144,12 +156,14 @@ class AgentRuntime {
       openrouter: Partial<ClientOptions>;
       perplexity: Partial<ClientOptions>;
       qwen: Partial<ClientOptions>;
+      sensenova: Partial<ClientOptions>;
       siliconcloud: Partial<ClientOptions>;
       spark: Partial<ClientOptions>;
       stepfun: Partial<ClientOptions>;
       taichu: Partial<ClientOptions>;
       togetherai: Partial<ClientOptions>;
       upstage: Partial<ClientOptions>;
+      xai: Partial<ClientOptions>;
       zeroone: Partial<ClientOptions>;
       zhipu: Partial<ClientOptions>;
     }>,
@@ -174,7 +188,7 @@ class AgentRuntime {
       }
 
       case ModelProvider.ZhiPu: {
-        runtimeModel = await LobeZhipuAI.fromAPIKey(params.zhipu);
+        runtimeModel = new LobeZhipuAI(params.zhipu);
         break;
       }
 
@@ -210,6 +224,11 @@ class AgentRuntime {
 
       case ModelProvider.DeepSeek: {
         runtimeModel = new LobeDeepSeekAI(params.deepseek);
+        break;
+      }
+
+      case ModelProvider.HuggingFace: {
+        runtimeModel = new LobeHuggingFaceAI(params.huggingface);
         break;
       }
 
@@ -288,6 +307,11 @@ class AgentRuntime {
         break;
       }
 
+      case ModelProvider.GiteeAI: {
+        runtimeModel = new LobeGiteeAI(params.giteeai);
+        break;
+      }
+
       case ModelProvider.Upstage: {
         runtimeModel = new LobeUpstageAI(params.upstage);
         break;
@@ -307,8 +331,32 @@ class AgentRuntime {
         runtimeModel = new LobeHunyuanAI(params.hunyuan);
         break;
       }
-    }
 
+      case ModelProvider.SenseNova: {
+        runtimeModel = await LobeSenseNovaAI.fromAPIKey(params.sensenova);
+        break;
+      }
+
+      case ModelProvider.XAI: {
+        runtimeModel = new LobeXAI(params.xai);
+        break;
+      }
+
+      case ModelProvider.Cloudflare: {
+        runtimeModel = new LobeCloudflareAI(params.cloudflare ?? {});
+        break;
+      }
+
+      case ModelProvider.InternLM: {
+        runtimeModel = new LobeInternLMAI(params.internlm);
+        break;
+      }
+
+      case ModelProvider.Higress: {
+        runtimeModel = new LobeHigressAI(params.higress);
+        break;
+      }
+    }
     return new AgentRuntime(runtimeModel);
   }
 }

@@ -1,14 +1,45 @@
 import { ModelProviderCard } from '@/types/llm';
 
-// ref :https://docs.together.ai/docs/chat-models
-// ref :https://www.together.ai/pricing
+// ref: https://docs.together.ai/docs/chat-models
+// ref: https://www.together.ai/pricing
 const TogetherAI: ModelProviderCard = {
   chatModels: [
+    {
+      description: 'LLaMA 3.2 旨在处理结合视觉和文本数据的任务。它在图像描述和视觉问答等任务中表现出色，跨越了语言生成和视觉推理之间的鸿沟。',
+      displayName: 'Llama 3.2 3B Instruct Turbo',
+      enabled: true,
+      id: 'meta-llama/Llama-3.2-3B-Instruct-Turbo',
+      tokens: 131_072,
+    },
+    {
+      description: 'LLaMA 3.2 旨在处理结合视觉和文本数据的任务。它在图像描述和视觉问答等任务中表现出色，跨越了语言生成和视觉推理之间的鸿沟。',
+      displayName: 'Llama 3.2 11B Vision Instruct Turbo (Free)',
+      enabled: true,
+      id: 'meta-llama/Llama-Vision-Free',
+      tokens: 131_072,
+      vision: true,
+    },
+    {
+      description: 'LLaMA 3.2 旨在处理结合视觉和文本数据的任务。它在图像描述和视觉问答等任务中表现出色，跨越了语言生成和视觉推理之间的鸿沟。',
+      displayName: 'Llama 3.2 11B Vision Instruct Turbo',
+      id: 'meta-llama/Llama-3.2-11B-Vision-Instruct-Turbo',
+      tokens: 131_072,
+      vision: true,
+    },
+    {
+      description: 'LLaMA 3.2 旨在处理结合视觉和文本数据的任务。它在图像描述和视觉问答等任务中表现出色，跨越了语言生成和视觉推理之间的鸿沟。',
+      displayName: 'Llama 3.2 90B Vision Instruct Turbo',
+      enabled: true,
+      id: 'meta-llama/Llama-3.2-90B-Vision-Instruct-Turbo',
+      tokens: 131_072,
+      vision: true,
+    },
     {
       description:
         'Llama 3.1 8B 模型采用FP8量化，支持高达131,072个上下文标记，是开源模型中的佼佼者，适合复杂任务，表现优异于许多行业基准。',
       displayName: 'Llama 3.1 8B Instruct Turbo',
       enabled: true,
+      functionCall: true,
       id: 'meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo',
       tokens: 131_072,
     },
@@ -17,6 +48,7 @@ const TogetherAI: ModelProviderCard = {
         'Llama 3.1 70B 模型经过精细调整，适用于高负载应用，量化至FP8提供更高效的计算能力和准确性，确保在复杂场景中的卓越表现。',
       displayName: 'Llama 3.1 70B Instruct Turbo',
       enabled: true,
+      functionCall: true,
       id: 'meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo',
       tokens: 131_072,
     },
@@ -25,8 +57,17 @@ const TogetherAI: ModelProviderCard = {
         '405B 的 Llama 3.1 Turbo 模型，为大数据处理提供超大容量的上下文支持，在超大规模的人工智能应用中表现突出。',
       displayName: 'Llama 3.1 405B Instruct Turbo',
       enabled: true,
+      functionCall: true,
       id: 'meta-llama/Meta-Llama-3.1-405B-Instruct-Turbo',
-      tokens: 8192,
+      tokens: 130_815,
+    },
+    {
+      description:
+        'Llama 3.1 Nemotron 70B 是由 NVIDIA 定制的大型语言模型，旨在提高 LLM 生成的响应对用户查询的帮助程度。该模型在 Arena Hard、AlpacaEval 2 LC 和 GPT-4-Turbo MT-Bench 等基准测试中表现出色，截至 2024 年 10 月 1 日，在所有三个自动对齐基准测试中排名第一。该模型使用 RLHF（特别是 REINFORCE）、Llama-3.1-Nemotron-70B-Reward 和 HelpSteer2-Preference 提示在 Llama-3.1-70B-Instruct 模型基础上进行训练',
+      displayName: 'Llama 3.1 Nemotron 70B',
+      enabled: true,
+      id: 'nvidia/Llama-3.1-Nemotron-70B-Instruct-HF',
+      tokens: 32_768,
     },
     {
       description: 'Llama 3 8B Instruct Turbo 是一款高效能的大语言模型，支持广泛的应用场景。',
@@ -54,14 +95,14 @@ const TogetherAI: ModelProviderCard = {
       tokens: 8192,
     },
     {
-      description: 'LLaMA-3 Chat (8B) 提供多语言支持，涵盖丰富的领域知识。',
-      displayName: 'LLaMA-3 Chat (8B)',
+      description: 'Llama 3 8B Instruct Reference 提供多语言支持，涵盖丰富的领域知识。',
+      displayName: 'Llama 3 8B Instruct Reference',
       id: 'meta-llama/Llama-3-8b-chat-hf',
       tokens: 8192,
     },
     {
-      description: 'LLaMA-3 Chat (70B) 是功能强大的聊天模型，支持复杂的对话需求。',
-      displayName: 'LLaMA-3 Chat (70B)',
+      description: 'Llama 3 70B Instruct Reference 是功能强大的聊天模型，支持复杂的对话需求。',
+      displayName: 'Llama 3 70B Instruct Reference',
       id: 'meta-llama/Llama-3-70b-chat-hf',
       tokens: 8192,
     },
@@ -70,6 +111,18 @@ const TogetherAI: ModelProviderCard = {
       displayName: 'LLaMA-2 Chat (13B)',
       id: 'meta-llama/Llama-2-13b-chat-hf',
       tokens: 4096,
+    },
+    {
+      description: 'LLaMA-2 提供优秀的语言处理能力和出色的交互体验。',
+      displayName: 'LLaMA-2 (70B)',
+      id: 'meta-llama/Llama-2-70b-hf',
+      tokens: 4096,
+    },
+    {
+      description: 'Code Llama 是一款专注于代码生成和讨论的 LLM，结合广泛的编程语言支持，适用于开发者环境。',
+      displayName: 'CodeLlama 34B Instruct',
+      id: 'codellama/CodeLlama-34b-Instruct-hf',
+      tokens: 16_384,
     },
     {
       description: 'Gemma 2 9B 由Google开发，提供高效的指令响应和综合能力。',
@@ -107,14 +160,28 @@ const TogetherAI: ModelProviderCard = {
     {
       description: 'Mistral (7B) Instruct 以高性能著称，适用于多种语言任务。',
       displayName: 'Mistral (7B) Instruct',
+      functionCall: true,
       id: 'mistralai/Mistral-7B-Instruct-v0.1',
+      tokens: 8192,
+    },
+    {
+      description: 'Mistral 7B是一款紧凑但高性能的模型，擅长批量处理和简单任务，如分类和文本生成，具有良好的推理能力。',
+      displayName: 'Mistral (7B)',
+      id: 'mistralai/Mistral-7B-v0.1',
       tokens: 8192,
     },
     {
       description: 'Mixtral-8x7B Instruct (46.7B) 提供高容量的计算框架，适合大规模数据处理。',
       displayName: 'Mixtral-8x7B Instruct (46.7B)',
       enabled: true,
+      functionCall: true,
       id: 'mistralai/Mixtral-8x7B-Instruct-v0.1',
+      tokens: 32_768,
+    },
+    {
+      description: 'Mixtral 8x7B是一个稀疏专家模型，利用多个参数提高推理速度，适合处理多语言和代码生成任务。',
+      displayName: 'Mixtral-8x7B (46.7B)',
+      id: 'mistralai/Mixtral-8x7B-v0.1',
       tokens: 32_768,
     },
     {
@@ -125,6 +192,12 @@ const TogetherAI: ModelProviderCard = {
       tokens: 65_536,
     },
     {
+      description: 'WizardLM 2 是微软AI提供的语言模型，在复杂对话、多语言、推理和智能助手领域表现尤为出色。',
+      displayName: 'WizardLM-2 8x22B',
+      id: 'microsoft/WizardLM-2-8x22B',
+      tokens: 65_536,
+    },
+    {
       description: 'DeepSeek LLM Chat (67B) 是创新的 AI 模型 提供深度语言理解和互动能力。',
       displayName: 'DeepSeek LLM Chat (67B)',
       enabled: true,
@@ -132,22 +205,36 @@ const TogetherAI: ModelProviderCard = {
       tokens: 4096,
     },
     {
+      description: 'QwQ模型是由 Qwen 团队开发的实验性研究模型，专注于增强 AI 推理能力。',
+      displayName: 'QwQ 32B Preview',
+      enabled: true,
+      id: 'Qwen/QwQ-32B-Preview',
+      tokens: 32_768,
+    },
+    {
+      description: 'Qwen2.5 是全新的大型语言模型系列，旨在优化指令式任务的处理。',
+      displayName: 'Qwen 2.5 7B Instruct Turbo',
+      enabled: true,
+      id: 'Qwen/Qwen2.5-7B-Instruct-Turbo',
+      tokens: 32_768,
+    },
+    {
+      description: 'Qwen2.5 是全新的大型语言模型系列，旨在优化指令式任务的处理。',
+      displayName: 'Qwen 2.5 72B Instruct Turbo',
+      enabled: true,
+      id: 'Qwen/Qwen2.5-72B-Instruct-Turbo',
+      tokens: 32_768,
+    },
+    {
+      description: 'Qwen2.5 Coder 32B Instruct 是阿里云发布的代码特定大语言模型系列的最新版本。该模型在 Qwen2.5 的基础上，通过 5.5 万亿个 tokens 的训练，显著提升了代码生成、推理和修复能力。它不仅增强了编码能力，还保持了数学和通用能力的优势。模型为代码智能体等实际应用提供了更全面的基础',
+      displayName: 'Qwen 2.5 Coder 32B Instruct',
+      id: 'Qwen/Qwen2.5-Coder-32B-Instruct',
+      tokens: 32_768,
+    },
+    {
       description: 'Qwen 2 Instruct (72B) 为企业级应用提供精准的指令理解和响应。',
       displayName: 'Qwen 2 Instruct (72B)',
-      enabled: true,
       id: 'Qwen/Qwen2-72B-Instruct',
-      tokens: 32_768,
-    },
-    {
-      description: 'Qwen 1.5 Chat (72B) 提供快速响应和自然对话能力，适合多语言环境。',
-      displayName: 'Qwen 1.5 Chat (72B)',
-      id: 'Qwen/Qwen1.5-72B-Chat',
-      tokens: 32_768,
-    },
-    {
-      description: 'Qwen 1.5 Chat (110B) 是一款高效能的对话模型，支持复杂对话场景。',
-      displayName: 'Qwen 1.5 Chat (110B)',
-      id: 'Qwen/Qwen1.5-110B-Chat',
       tokens: 32_768,
     },
     {
@@ -169,12 +256,6 @@ const TogetherAI: ModelProviderCard = {
       tokens: 32_768,
     },
     {
-      description: 'Nous Hermes-2 Yi (34B) 提供优化的语言输出和多样化的应用可能。',
-      displayName: 'Nous Hermes-2 Yi (34B)',
-      id: 'NousResearch/Nous-Hermes-2-Yi-34B',
-      tokens: 4096,
-    },
-    {
       description: 'MythoMax-L2 (13B) 是一种创新模型，适合多领域应用和复杂任务。',
       displayName: 'MythoMax-L2 (13B)',
       id: 'Gryphe/MythoMax-L2-13b',
@@ -187,7 +268,7 @@ const TogetherAI: ModelProviderCard = {
       tokens: 32_768,
     },
   ],
-  checkModel: 'meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo',
+  checkModel: 'meta-llama/Llama-Vision-Free',
   description:
     'Together AI 致力于通过创新的 AI 模型实现领先的性能，提供广泛的自定义能力，包括快速扩展支持和直观的部署流程，满足企业的各种需求。',
   id: 'togetherai',
