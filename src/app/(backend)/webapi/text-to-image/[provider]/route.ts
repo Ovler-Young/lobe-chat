@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server';
 
-import { initAgentRuntimeWithUserPayload } from '@/app/(backend)/api/chat/agentRuntime';
-import { createErrorResponse } from '@/app/(backend)/api/errorResponse';
-import { checkAuth } from '@/app/(backend)/api/middleware/auth';
+import { checkAuth } from '@/app/(backend)/middleware/auth';
 import { ChatCompletionErrorPayload } from '@/libs/agent-runtime';
 import { TextToImagePayload } from '@/libs/agent-runtime/types';
+import { initAgentRuntimeWithUserPayload } from '@/server/modules/AgentRuntime';
 import { ChatErrorType } from '@/types/fetch';
+import { createErrorResponse } from '@/utils/errorResponse';
 
 export const runtime = 'edge';
 
@@ -48,7 +48,7 @@ export const preferredRegion = [
 // );
 
 export const POST = checkAuth(async (req: Request, { params, jwtPayload }) => {
-  const { provider } = params;
+  const { provider } = await params;
 
   try {
     // ============  1. init chat model   ============ //
