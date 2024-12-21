@@ -1,9 +1,11 @@
 import analyzer from '@next/bundle-analyzer';
 import { withSentryConfig } from '@sentry/nextjs';
 import withSerwistInit from '@serwist/next';
+import ReactComponentName from 'react-scan/react-component-name/webpack';
 
 const isProd = process.env.NODE_ENV === 'production';
 const buildWithDocker = process.env.DOCKER === 'true';
+const enableReactScan = !!process.env.REACT_SCAN_MONITOR_API_KEY;
 
 // if you need to proxy the api endpoint to remote server
 const API_PROXY_ENDPOINT = process.env.API_PROXY_ENDPOINT || '';
@@ -159,6 +161,11 @@ const nextConfig = {
       permanent: true,
       source: '/settings',
     },
+    {
+      destination: '/chat',
+      permanent: true,
+      source: '/welcome',
+    },
   ],
 
   rewrites: async () => [
@@ -172,6 +179,10 @@ const nextConfig = {
       asyncWebAssembly: true,
       layers: true,
     };
+
+    if (enableReactScan) {
+      config.plugins.push(ReactComponentName({}));
+    }
 
     // to fix shikiji compile error
     // refs: https://github.com/antfu/shikiji/issues/23

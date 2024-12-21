@@ -51,11 +51,30 @@
       "title": "使用カスタム Bedrock 認証情報"
     }
   },
+  "cloudflare": {
+    "apiKey": {
+      "desc": "Cloudflare API Key を入力してください",
+      "placeholder": "Cloudflare API Key",
+      "title": "Cloudflare API Key"
+    },
+    "baseURLOrAccountID": {
+      "desc": "Cloudflare アカウント ID またはカスタム API アドレスを入力してください。",
+      "placeholder": "Cloudflare アカウント ID / カスタム API URL",
+      "title": "Cloudflare アカウント ID / API アドレス"
+    }
+  },
   "github": {
     "personalAccessToken": {
       "desc": "あなたのGithub PATを入力してください。[こちら](https://github.com/settings/tokens)をクリックして作成します",
       "placeholder": "ghp_xxxxxx",
       "title": "GitHub PAT"
+    }
+  },
+  "huggingface": {
+    "accessToken": {
+      "desc": "あなたの HuggingFace トークンを入力してください。 [こちら](https://huggingface.co/settings/tokens) をクリックして作成します。",
+      "placeholder": "hf_xxxxxxxxx",
+      "title": "HuggingFace トークン"
     }
   },
   "ollama": {
@@ -69,10 +88,10 @@
       "title": "カスタムモデル名"
     },
     "download": {
-      "desc": "Ollama is currently downloading the model. Please try not to close this page. The download will resume from where it left off if interrupted.",
-      "remainingTime": "Remaining Time",
-      "speed": "Download Speed",
-      "title": "Downloading model {{model}}"
+      "desc": "Ollamaはこのモデルをダウンロードしています。このページを閉じないでください。再ダウンロードすると中断したところから再開されます。",
+      "remainingTime": "残り時間",
+      "speed": "ダウンロード速度",
+      "title": "モデル{{model}}をダウンロード中"
     },
     "endpoint": {
       "desc": "Ollamaプロキシインターフェースアドレスを入力してください。ローカルで追加の指定がない場合は空白のままにしてください",
@@ -104,12 +123,28 @@
     },
     "title": "Ollama",
     "unlock": {
-      "cancel": "Cancel Download",
-      "confirm": "Download",
-      "description": "Enter your Ollama model tag to continue the session",
+      "cancel": "ダウンロードをキャンセル",
+      "confirm": "ダウンロード",
+      "description": "Ollamaモデルのラベルを入力して、セッションを続行してください。",
       "downloaded": "{{completed}} / {{total}}",
-      "starting": "Starting download...",
-      "title": "Download specified Ollama model"
+      "starting": "ダウンロードを開始しています...",
+      "title": "指定されたOllamaモデルをダウンロード"
+    }
+  },
+  "sensenova": {
+    "sensenovaAccessKeyID": {
+      "desc": "SenseNova アクセスキー ID を入力してください",
+      "placeholder": "SenseNova アクセスキー ID",
+      "title": "アクセスキー ID"
+    },
+    "sensenovaAccessKeySecret": {
+      "desc": "SenseNova アクセスキーシークレットを入力してください",
+      "placeholder": "SenseNova アクセスキーシークレット",
+      "title": "アクセスキーシークレット"
+    },
+    "unlock": {
+      "description": "あなたのアクセスキー ID / アクセスキーシークレットを入力すると、セッションが開始されます。アプリはあなたの認証設定を記録しません",
+      "title": "カスタム SenseNova 認証情報を使用"
     }
   },
   "wenxin": {

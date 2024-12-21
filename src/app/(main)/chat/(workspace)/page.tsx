@@ -3,7 +3,7 @@ import { BRANDING_NAME } from '@/const/branding';
 import { ldModule } from '@/server/ld';
 import { metadataModule } from '@/server/metadata';
 import { translation } from '@/server/translation';
-import { isMobileDevice } from '@/utils/responsive';
+import { isMobileDevice } from '@/utils/server/responsive';
 
 import PageTitle from '../features/PageTitle';
 import TelemetryNotification from './features/TelemetryNotification';
@@ -18,7 +18,7 @@ export const generateMetadata = async () => {
 };
 
 const Page = async () => {
-  const mobile = isMobileDevice();
+  const mobile = await isMobileDevice();
   const { t } = await translation('metadata');
   const ld = ldModule.generate({
     description: t('chat.title', { appName: BRANDING_NAME }),
