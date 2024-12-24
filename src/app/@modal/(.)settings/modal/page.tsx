@@ -1,4 +1,4 @@
-import { gerServerDeviceInfo, isMobileDevice } from '@/utils/responsive';
+import { gerServerDeviceInfo, isMobileDevice } from '@/utils/server/responsive';
 
 import SettingsModal from './index';
 
@@ -7,9 +7,9 @@ import SettingsModal from './index';
  * @refs: https://github.com/lobehub/lobe-chat/discussions/2295#discussioncomment-9290942
  */
 
-const Page = () => {
-  const isMobile = isMobileDevice();
-  const { os, browser } = gerServerDeviceInfo();
+const Page = async () => {
+  const isMobile = await isMobileDevice();
+  const { os, browser } = await gerServerDeviceInfo();
 
   return <SettingsModal browser={browser} mobile={isMobile} os={os} />;
 };

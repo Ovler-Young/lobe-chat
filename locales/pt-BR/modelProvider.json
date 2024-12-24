@@ -51,11 +51,30 @@
       "title": "Usar informações de autenticação Bedrock personalizadas"
     }
   },
+  "cloudflare": {
+    "apiKey": {
+      "desc": "Insira o Cloudflare API Key",
+      "placeholder": "Cloudflare API Key",
+      "title": "Cloudflare API Key"
+    },
+    "baseURLOrAccountID": {
+      "desc": "Insira o ID da conta do Cloudflare ou o endereço da API personalizado",
+      "placeholder": "ID da conta do Cloudflare / URL da API personalizada",
+      "title": "ID da conta do Cloudflare / Endereço da API"
+    }
+  },
   "github": {
     "personalAccessToken": {
       "desc": "Insira seu PAT do Github, clique [aqui](https://github.com/settings/tokens) para criar",
       "placeholder": "ghp_xxxxxx",
       "title": "GitHub PAT"
+    }
+  },
+  "huggingface": {
+    "accessToken": {
+      "desc": "Insira seu Token do HuggingFace, clique [aqui](https://huggingface.co/settings/tokens) para criar",
+      "placeholder": "hf_xxxxxxxxx",
+      "title": "Token do HuggingFace"
     }
   },
   "ollama": {
@@ -69,10 +88,10 @@
       "title": "Nomes dos Modelos Personalizados"
     },
     "download": {
-      "desc": "Ollama is downloading the model. Please do not close this page. It will resume from where it left off if you restart the download.",
-      "remainingTime": "Remaining Time",
-      "speed": "Download Speed",
-      "title": "Downloading model {{model}}"
+      "desc": "Ollama está baixando este modelo, por favor, evite fechar esta página. O download será retomado do ponto em que parou.",
+      "remainingTime": "Tempo restante",
+      "speed": "Velocidade de download",
+      "title": "Baixando o modelo {{model}} "
     },
     "endpoint": {
       "desc": "Insira o endereço do proxy de interface da Ollama, se não foi especificado localmente, pode deixar em branco",
@@ -110,6 +129,22 @@
       "downloaded": "{{completed}} / {{total}}",
       "starting": "Starting download...",
       "title": "Download specified Ollama model"
+    }
+  },
+  "sensenova": {
+    "sensenovaAccessKeyID": {
+      "desc": "Insira o SenseNova Access Key ID",
+      "placeholder": "SenseNova Access Key ID",
+      "title": "Access Key ID"
+    },
+    "sensenovaAccessKeySecret": {
+      "desc": "Insira o SenseNova Access Key Secret",
+      "placeholder": "SenseNova Access Key Secret",
+      "title": "Access Key Secret"
+    },
+    "unlock": {
+      "description": "Digite seu Access Key ID / Access Key Secret para iniciar a sessão. O aplicativo não registrará suas configurações de autenticação",
+      "title": "Usar informações de autenticação personalizadas do SenseNova"
     }
   },
   "wenxin": {
