@@ -21,7 +21,7 @@ export default {
   },
   bedrock: {
     accessKeyId: {
-      desc: '填入AWS Access Key Id',
+      desc: '填入 AWS Access Key Id',
       placeholder: 'AWS Access Key Id',
       title: 'AWS Access Key Id',
     },
@@ -52,11 +52,30 @@ export default {
       title: '使用自定义 Bedrock 鉴权信息',
     },
   },
+  cloudflare: {
+    apiKey: {
+      desc: '请填写 Cloudflare API Key',
+      placeholder: 'Cloudflare API Key',
+      title: 'Cloudflare API Key',
+    },
+    baseURLOrAccountID: {
+      desc: '填入 Cloudflare 账户 ID 或 自定义 API 地址',
+      placeholder: 'Cloudflare Account ID / custom API URL',
+      title: 'Cloudflare 账户 ID / API 地址',
+    }
+  },
   github: {
     personalAccessToken: {
-      desc: '填入你的 Github PAT，点击[这里](https://github.com/settings/tokens) 创建',
+      desc: '填入你的 Github PAT，点击 [这里](https://github.com/settings/tokens) 创建',
       placeholder: 'ghp_xxxxxx',
       title: 'Github PAT',
+    },
+  },
+  huggingface: {
+    accessToken: {
+      desc: '填入你的 HuggingFace Token，点击 [这里](https://huggingface.co/settings/tokens) 创建',
+      placeholder: 'hf_xxxxxxxxx',
+      title: 'HuggingFace Token',
     },
   },
   ollama: {
