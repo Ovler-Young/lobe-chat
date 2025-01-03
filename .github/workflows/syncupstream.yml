@@ -34,10 +34,10 @@ jobs:
       - name: Update main branch
         run: |
           git checkout  -B main origin/main
-          git rebase upstream/main
+          git rebase upstream/main  --skip
           git push origin main --force
       - name: Update newfaster-upstream branch
         run: |
           git checkout -B newfaster-upstream origin/newfaster
-          git rebase upstream/main
+          git rebase upstream/main  --skip
           git push origin newfaster-upstream --force
