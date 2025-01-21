@@ -4,6 +4,7 @@
 
 1. 重新关闭了平滑输出动画。
 2. 修改了分支名，以适配新的workflow。
+3. workflow 增加 concurrency, 以避免同时运行多个workflow。
 
 ## 2024.11.21
 

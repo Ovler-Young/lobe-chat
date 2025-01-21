@@ -15,6 +15,10 @@ env:
   REGISTRY_IMAGE: lobehub/lobe-chat-database
   PR_TAG_PREFIX: pr-
 
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
 jobs:
   build:
     # 添加 PR label 触发条件
