@@ -1,12 +1,14 @@
 name: Publish Database Docker Image
 
 on:
-  workflow_dispatch:
-  release:
-    types: [published]
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+    branches:
+      - ovleredit
   push:
-  schedule:
-  - cron: "0 2 * * *"
+    branches:
+      - ovleredit
+  workflow_dispatch:
 
 jobs:
   push_to_registry:
@@ -16,7 +18,7 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v4
         with:
-          ref: newfaster-upstream
+          ref: ovleredit-upstream
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v3

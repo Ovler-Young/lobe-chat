@@ -4,10 +4,10 @@ on:
   pull_request_target:
     types: [opened, synchronize, reopened]
     branches:
-      - newfaster
+      - ovleredit
   push:
     branches:
-      - newfaster
+      - ovleredit
   workflow_dispatch:
 
 jobs:
@@ -33,17 +33,17 @@ jobs:
           git fetch upstream main
       - name: Update main branch
         run: |
-          git checkout  -B main origin/main
+          git checkout -B main origin/main
           git rebase upstream/main
           git push origin main --force
-      - name: Update newfaster-upstream branch with conflict handling
+      - name: Update ovleredit-upstream branch with conflict handling
         run: |
           set -e
-          git checkout -B newfaster-upstream origin/newfaster
+          git checkout -B ovleredit-upstream origin/ovleredit
           git rebase upstream/main || (
             echo "Conflict detected during rebase. Attempting to skip..."
             while ! git rebase --continue && ! git rebase --skip; do
               echo "Retrying rebase..."
             done
           )
-          git push origin newfaster-upstream --force
+          git push origin ovleredit-upstream --force
