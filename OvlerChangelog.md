@@ -1,8 +1,13 @@
 # Changelog of Ovler
 
+## 2025.1.21
+
+1. 重新关闭了平滑输出动画。
+2. 修改了分支名，以适配新的workflow。
+
 ## 2024.11.21
 
-1. 更改了deepseek的api调用，使用beta接口，以及支持8k输出
+1. 更改了deepseek的api调用，使用beta接口，以及支持8k输出（conflict，已失效）
 2. 更改了default branch，应该能自动编译了。
 
 ## 2024.10.21
@@ -20,7 +25,7 @@
 
 ## 2024.10.8
 
-1. 更新部分openAI模型调用以适配上游api
+1. 更新部分openAI模型调用以适配上游api（conflict，已失效）
 2. 更改tts行为：现在会跳过代码块不读
 3. 关闭了平滑输出动画， Fix <https://github.com/lobehub/lobe-chat/issues/2594>
 
