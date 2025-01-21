@@ -10,6 +10,10 @@ on:
       - ovleredit
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
 jobs:
   push_to_registry:
     name: Push Docker image to Docker Hub
