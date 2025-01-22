@@ -47,3 +47,11 @@ jobs:
             done
           )
           git push origin ovleredit-upstream --force
+
+      - name: Replace text patterns
+        run: |
+          find . -type f -exec sed -i 's/lobeThinking/thinking/g' {} +
+          find . -type f -exec sed -i 's/lobeArtifact/artifact/g' {} +
+          git add .
+          git commit -m "chore: replace text patterns" || echo "No changes to commit"
+          git push origin ovleredit-upstream --force
