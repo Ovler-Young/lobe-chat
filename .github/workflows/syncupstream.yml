@@ -59,6 +59,7 @@ jobs:
             to="${patterns[$from]}"
             find . -type f \
               -not -path "./.github/workflows/*" \
+              -not -path "./OvlerChangelog.md" \
               -exec sed -i "s|$from|$to|g" {} +
           done
           git add .

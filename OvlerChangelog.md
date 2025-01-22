@@ -8,6 +8,7 @@
 4. sync时自动把`lobeThinking`替换为`thinking`, 把`lobeArtifact`替换成`artifact`。
 5. fix 自动替换脚本，排除workflow。
 6. 自动替换deepseek的api接口为beta接口。
+7. fix 自动替换脚本，排除本changelog。
 
 ## 2024.11.21
 
