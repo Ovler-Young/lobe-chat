@@ -50,8 +50,17 @@ jobs:
 
       - name: Replace text patterns
         run: |
-          find . -type f -exec sed -i 's/lobeThinking/thinking/g' {} +
-          find . -type f -exec sed -i 's/lobeArtifact/artifact/g' {} +
+          declare -A patterns=(
+            ["lobeThinking"]="thinking"
+            ["lobeArtifact"]="artifact"
+            ["https://api.deepseek.com/v1"]="https://api.deepseek.com/beta"
+          )
+          for from in "${!patterns[@]}"; do
+            to="${patterns[$from]}"
+            find . -type f \
+              -not -path "./.github/workflows/*" \
+              -exec sed -i "s|$from|$to|g" {} +
+          done
           git add .
           git commit -m "chore: replace text patterns" || echo "No changes to commit"
           git push origin ovleredit-upstream --force
