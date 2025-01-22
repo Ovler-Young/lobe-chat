@@ -6,6 +6,8 @@
 2. 修改了分支名，以适配新的workflow。
 3. workflow 增加 concurrency, 以避免同时运行多个workflow。
 4. sync时自动把`lobeThinking`替换为`thinking`, 把`lobeArtifact`替换成`artifact`。
+5. fix 自动替换脚本，排除workflow。
+6. 自动替换deepseek的api接口为beta接口。
 
 ## 2024.11.21
 
