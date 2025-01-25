@@ -13,7 +13,7 @@ import { dotLoading } from '@/styles/loading';
 import { MarkdownElementProps } from '../type';
 
 /**
- * Replace all line breaks in the matched `lobeArtifact` tag with an empty string
+ * Replace all line breaks in the matched `artifact` tag with an empty string
  */
 export const isLobeThinkingClosed = (input: string = '') => {
   const openTag = `<${ARTIFACT_THINKING_TAG}>`;

@@ -1,0 +1,67 @@
+name: Sync Faster-Upstream Branch
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+    branches:
+      - ovleredit
+  push:
+    branches:
+      - ovleredit
+  workflow_dispatch:
+
+jobs:
+  sync-faster-upstream:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+      - name: Fetch all branches
+        run: |
+          git fetch --all
+      - name: Fetch upstream changes
+        run: |
+          git remote add upstream https://github.com/lobehub/lobe-chat.git
+          git fetch upstream main
+      - name: Update main branch
+        run: |
+          git checkout -B main origin/main
+          git rebase upstream/main
+          git push origin main --force
+      - name: Update ovleredit-upstream branch with conflict handling
+        run: |
+          set -e
+          git checkout -B ovleredit-upstream origin/ovleredit
+          git rebase upstream/main || (
+            echo "Conflict detected during rebase. Attempting to skip..."
+            while ! git rebase --continue && ! git rebase --skip; do
+              echo "Retrying rebase..."
+            done
+          )
+          git push origin ovleredit-upstream --force
+
+      - name: Replace text patterns
+        run: |
+          declare -A patterns=(
+            ["lobeThinking"]="thinking"
+            ["lobeArtifact"]="artifact"
+            ["https://api.deepseek.com/v1"]="https://api.deepseek.com/beta"
+          )
+          for from in "${!patterns[@]}"; do
+            to="${patterns[$from]}"
+            find . -type f \
+              -not -path "./.github/workflows/*" \
+              -not -path "./OvlerChangelog.md" \
+              -exec sed -i "s|$from|$to|g" {} +
+          done
+          git add .
+          git commit -m "chore: replace text patterns" || echo "No changes to commit"
+          git push origin ovleredit-upstream --force
