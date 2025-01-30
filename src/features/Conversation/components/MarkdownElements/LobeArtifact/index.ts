@@ -4,7 +4,7 @@ import rehypePlugin from './rehypePlugin';
 const AntArtifactElement = {
   Component,
   rehypePlugin,
-  tag: 'lobeArtifact',
+  tag: 'artifact',
 };
 
 export default AntArtifactElement;
