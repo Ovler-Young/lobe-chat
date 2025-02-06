@@ -46,7 +46,6 @@ jobs:
               echo "Retrying rebase..."
             done
           )
-          git push origin ovleredit-upstream --force
 
       - name: Replace text patterns
         run: |

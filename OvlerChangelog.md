@@ -3,6 +3,7 @@
 ## 2025.2.6
 
 1. 修复DeepSeek thinking部分上游修改带来的bug
+2. 修复Sync脚本在会push两次ovleredit-upstream的问题
 
 ## 2025.1.21
 
