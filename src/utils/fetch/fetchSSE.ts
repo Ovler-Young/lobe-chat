@@ -329,7 +329,6 @@ export const fetchSSE = async (url: string, options: RequestInit & FetchSSEOptio
       thinking = text;
       options.onMessageHandle?.({ text: delta, type: 'reasoning' });
     },
-    startSpeed: smoothingSpeed,
   });
 
   const toolCallsController = createSmoothToolCalls({
