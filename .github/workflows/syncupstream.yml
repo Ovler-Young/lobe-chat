@@ -48,7 +48,7 @@ jobs:
             done
           )
 
-      - name: Replace text patterns
+      - name: Replace text patterns and remove workflows
         run: |
           declare -A patterns=(
             ["lobeThinking"]="thinking"
@@ -62,6 +62,8 @@ jobs:
               -not -path "./OvlerChangelog.md" \
               -exec sed -i "s|$from|$to|g" {} +
           done
+          # 删除.github/workflows目录下的所有文件
+          git rm -r --ignore-unmatch .github/workflows/*
           git add .
-          git commit -m "chore: replace text patterns" || echo "No changes to commit"
+          git commit -m "chore: replace text patterns and remove workflows" || echo "No changes to commit"
           git push origin ovleredit-upstream --force

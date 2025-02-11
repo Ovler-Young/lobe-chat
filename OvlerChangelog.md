@@ -3,6 +3,7 @@
 ## 2025.2.11
 
 1. 使用PAT_TOKEN
+2. 移除ovleredit-upstream中的所有workflow
 
 ## 2025.2.6
 
