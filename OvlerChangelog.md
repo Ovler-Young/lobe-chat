@@ -1,5 +1,9 @@
 # Changelog of Ovler
 
+## 2025.2.11
+
+1. 使用PAT_TOKEN
+
 ## 2025.2.6
 
 1. 修复DeepSeek thinking部分上游修改带来的bug
