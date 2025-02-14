@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import rehypePlugin from './rehypePlugin';
 
 describe('rehypePlugin', () => {
-  it('should transform <lobeThinking> tags within paragraphs', () => {
+  it('should transform <thinking> tags within paragraphs', () => {
     const tree = {
       type: 'root',
       children: [
@@ -12,9 +12,9 @@ describe('rehypePlugin', () => {
           tagName: 'p',
           children: [
             { type: 'text', value: 'Before ' },
-            { type: 'raw', value: '<lobeThinking>' },
+            { type: 'raw', value: '<thinking>' },
             { type: 'text', value: 'Thinking content' },
-            { type: 'raw', value: '</lobeThinking>' },
+            { type: 'raw', value: '</thinking>' },
             { type: 'text', value: ' After' },
           ],
         },
@@ -26,7 +26,7 @@ describe('rehypePlugin', () => {
       children: [
         {
           type: 'element',
-          tagName: 'lobeThinking',
+          tagName: 'thinking',
           properties: {},
           children: [{ type: 'text', value: 'Thinking content' }],
         },
@@ -48,7 +48,7 @@ describe('rehypePlugin', () => {
           tagName: 'p',
           children: [
             { type: 'text', value: 'Thinking content' },
-            { type: 'raw', value: '</lobeThinking>' },
+            { type: 'raw', value: '</thinking>' },
             { type: 'text', value: ' After' },
           ],
         },
@@ -76,18 +76,18 @@ describe('rehypePlugin', () => {
           type: 'element',
           tagName: 'p',
           children: [
-            { type: 'raw', value: '<lobeThinking>' },
+            { type: 'raw', value: '<thinking>' },
             { type: 'text', value: 'First thinking' },
-            { type: 'raw', value: '</lobeThinking>' },
+            { type: 'raw', value: '</thinking>' },
           ],
         },
         {
           type: 'element',
           tagName: 'p',
           children: [
-            { type: 'raw', value: '<lobeThinking>' },
+            { type: 'raw', value: '<thinking>' },
             { type: 'text', value: 'Second thinking' },
-            { type: 'raw', value: '</lobeThinking>' },
+            { type: 'raw', value: '</thinking>' },
           ],
         },
       ],
@@ -103,13 +103,13 @@ describe('rehypePlugin', () => {
         },
         {
           type: 'element',
-          tagName: 'lobeThinking',
+          tagName: 'thinking',
           properties: {},
           children: [{ type: 'text', value: 'First thinking' }],
         },
         {
           type: 'element',
-          tagName: 'lobeThinking',
+          tagName: 'thinking',
           properties: {},
           children: [{ type: 'text', value: 'Second thinking' }],
         },
