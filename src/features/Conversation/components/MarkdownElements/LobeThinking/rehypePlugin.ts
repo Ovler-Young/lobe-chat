@@ -19,28 +19,28 @@ const rehypePlugin = () => (tree: Node) => {
         // 有闭合标签的情况
         if (closeTagIndex !== -1 && closeTagIndex > openTagIndex) {
           const content = children.slice(openTagIndex + 1, closeTagIndex);
-          const lobeThinkingNode = {
+          const thinkingNode = {
             children: content,
             properties: {},
             tagName: ARTIFACT_THINKING_TAG,
             type: 'element',
           };
 
-          // Replace the entire paragraph with our new lobeThinking node
-          parent.children.splice(index, 1, lobeThinkingNode);
+          // Replace the entire paragraph with our new thinking node
+          parent.children.splice(index, 1, thinkingNode);
           return index; // Skip processing the newly inserted node
         } else {
           // 无闭合标签的情况
           const content = children.slice(openTagIndex + 1);
-          const lobeThinkingNode = {
+          const thinkingNode = {
             children: content,
             properties: {},
             tagName: ARTIFACT_THINKING_TAG,
             type: 'element',
           };
 
-          // Replace the entire paragraph with our new lobeThinking node
-          parent.children.splice(index, 1, lobeThinkingNode);
+          // Replace the entire paragraph with our new thinking node
+          parent.children.splice(index, 1, thinkingNode);
           return index; // Skip processing the newly inserted node
         }
       }
