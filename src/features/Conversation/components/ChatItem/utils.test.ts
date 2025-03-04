@@ -6,7 +6,7 @@ describe('processWithArtifact', () => {
   it('should removeLineBreaks with closed tag', () => {
     const input = `好的
 
-<lobeArtifact identifier="sleep-interpretation-card" type="image/svg+xml" title="睡觉的新解释">
+<artifact identifier="sleep-interpretation-card" type="image/svg+xml" title="睡觉的新解释">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600">
 <defs>
 <style>
@@ -18,19 +18,19 @@ describe('processWithArtifact', () => {
 <!-- 总结 -->
 <text x="200" y="500" font-family="'Noto Serif SC', serif" font-size="20" text-anchor="middle" fill="#8B4513">睡觉：生产力的假死，创造力的重生。</text>
 </svg>
-</lobeArtifact>`;
+</artifact>`;
 
     const output = processWithArtifact(input);
 
     expect(output).toEqual(`好的
 
-<lobeArtifact identifier="sleep-interpretation-card" type="image/svg+xml" title="睡觉的新解释"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600"><defs><style>@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&amp;display=swap');</style></defs><!-- 背景 --><rect width="400" height="600" fill="#F0EAD6"/><!-- 总结 --><text x="200" y="500" font-family="'Noto Serif SC', serif" font-size="20" text-anchor="middle" fill="#8B4513">睡觉：生产力的假死，创造力的重生。</text></svg></lobeArtifact>`);
+<artifact identifier="sleep-interpretation-card" type="image/svg+xml" title="睡觉的新解释"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600"><defs><style>@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&amp;display=swap');</style></defs><!-- 背景 --><rect width="400" height="600" fill="#F0EAD6"/><!-- 总结 --><text x="200" y="500" font-family="'Noto Serif SC', serif" font-size="20" text-anchor="middle" fill="#8B4513">睡觉：生产力的假死，创造力的重生。</text></svg></artifact>`);
   });
 
   it('should removeLineBreaks with open tag', () => {
     const input = `好的
 
-<lobeArtifact identifier="ai-interpretation-card" type="image/svg+xml" title="人工智能新解卡片">
+<artifact identifier="ai-interpretation-card" type="image/svg+xml" title="人工智能新解卡片">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600">
   <defs>
     <style>
@@ -43,7 +43,7 @@ describe('processWithArtifact', () => {
 
     expect(output).toEqual(`好的
 
-<lobeArtifact identifier="ai-interpretation-card" type="image/svg+xml" title="人工智能新解卡片"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600">  <defs>    <style>      @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&amp;display=swap');    </style>  </defs>`);
+<artifact identifier="ai-interpretation-card" type="image/svg+xml" title="人工智能新解卡片"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600">  <defs>    <style>      @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&amp;display=swap');    </style>  </defs>`);
   });
   it('should not throw error with empty', () => {
     const input = '';
@@ -53,49 +53,49 @@ describe('processWithArtifact', () => {
     expect(output).toEqual('');
   });
 
-  describe('close the <lobeArtifact tag', () => {
-    it('close tag for <lobeArtifact', () => {
-      const input = '<lobeArtifact';
+  describe('close the <artifact tag', () => {
+    it('close tag for <artifact', () => {
+      const input = '<artifact';
 
       const output = processWithArtifact(input);
 
-      expect(output).toEqual('<lobeArtifact>');
+      expect(output).toEqual('<artifact>');
     });
 
-    it('close tag for <lobeArtifact identifier="something"', () => {
-      const input = '<lobeArtifact identifier="something"';
+    it('close tag for <artifact identifier="something"', () => {
+      const input = '<artifact identifier="something"';
 
       const output = processWithArtifact(input);
 
-      expect(output).toEqual('<lobeArtifact>');
+      expect(output).toEqual('<artifact>');
     });
 
-    it('close tag for <lobeArtifact identifier="ai-interpretation" type="image/svg+xml" titl', () => {
-      const input = '<lobeArtifact identifier="ai-interpretation" type="image/svg+xml" titl';
+    it('close tag for <artifact identifier="ai-interpretation" type="image/svg+xml" titl', () => {
+      const input = '<artifact identifier="ai-interpretation" type="image/svg+xml" titl';
 
       const output = processWithArtifact(input);
 
-      expect(output).toEqual('<lobeArtifact>');
+      expect(output).toEqual('<artifact>');
     });
 
-    it('only change the <lobeArtifact> part', () => {
+    it('only change the <artifact> part', () => {
       const input = `好的,让我来用新的视角解释"人工智能"这个词汇。
 
-<lobeThinking>这个词汇涉及了当代科技和社会热点,需要用批判性和幽默感来解读其本质。我会用隐喻和讽刺来表达,同时保持简洁有力。</lobeThinking>
+<thinking>这个词汇涉及了当代科技和社会热点,需要用批判性和幽默感来解读其本质。我会用隐喻和讽刺来表达,同时保持简洁有力。</thinking>
 
-<lobeArtifact identifier="ai-new-interpretation" type="image/svg+xml" t`;
+<artifact identifier="ai-new-interpretation" type="image/svg+xml" t`;
 
       const output = processWithArtifact(input);
 
       expect(output).toEqual(`好的,让我来用新的视角解释"人工智能"这个词汇。
 
-<lobeThinking>这个词汇涉及了当代科技和社会热点,需要用批判性和幽默感来解读其本质。我会用隐喻和讽刺来表达,同时保持简洁有力。</lobeThinking>
+<thinking>这个词汇涉及了当代科技和社会热点,需要用批判性和幽默感来解读其本质。我会用隐喻和讽刺来表达,同时保持简洁有力。</thinking>
 
-<lobeArtifact>`);
+<artifact>`);
     });
 
-    it('not change for <lobeArtifact />', () => {
-      const input = '<lobeArtifact/>';
+    it('not change for <artifact />', () => {
+      const input = '<artifact/>';
 
       const output = processWithArtifact(input);
 
@@ -103,14 +103,14 @@ describe('processWithArtifact', () => {
     });
   });
 
-  it('should removeLinkBreaks for lobeThinking', () => {
+  it('should removeLinkBreaks for thinking', () => {
     const input = `好的,让我以一个特别的视角来解释"人工智能"这个词汇。
 
-<lobeThinking>
+<thinking>
 这个词汇涉及了当代科技和社会热点,需要用批判性、幽默而深刻的视角来解读。我会运用隐喻和讽刺,抓住其本质,并以精练的方式表达出来。这符合一个好的artifact的标准,因为它是一个独立的、可能被用户修改或重用的内容。我将创建一个新的SVG artifact来呈现这个解释。
-</lobeThinking>
+</thinking>
 
-<lobeArtifact identifier="ai-new-interpretation" type="image/svg+xml" title="人工智能的新解释">
+<artifact identifier="ai-new-interpretation" type="image/svg+xml" title="人工智能的新解释">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600">
   <defs>
     <style>
@@ -123,7 +123,7 @@ describe('processWithArtifact', () => {
     </style>
   </defs>
 </svg>
-</lobeArtifact>
+</artifact>
 
 我为"人工智能"这个词创建了一个新的解释,并将其呈现在一个SVG卡片中。这个解释采用了批判性和幽默的视角,试图揭示这个概念背后的一些潜在问题。`;
 
@@ -131,40 +131,40 @@ describe('processWithArtifact', () => {
 
     expect(output).toEqual(`好的,让我以一个特别的视角来解释"人工智能"这个词汇。
 
-<lobeThinking>这个词汇涉及了当代科技和社会热点,需要用批判性、幽默而深刻的视角来解读。我会运用隐喻和讽刺,抓住其本质,并以精练的方式表达出来。这符合一个好的artifact的标准,因为它是一个独立的、可能被用户修改或重用的内容。我将创建一个新的SVG artifact来呈现这个解释。</lobeThinking>
+<thinking>这个词汇涉及了当代科技和社会热点,需要用批判性、幽默而深刻的视角来解读。我会运用隐喻和讽刺,抓住其本质,并以精练的方式表达出来。这符合一个好的artifact的标准,因为它是一个独立的、可能被用户修改或重用的内容。我将创建一个新的SVG artifact来呈现这个解释。</thinking>
 
-<lobeArtifact identifier="ai-new-interpretation" type="image/svg+xml" title="人工智能的新解释"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600">  <defs>    <style>      @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&amp;display=swap');      .background { fill: #f0f0f0; }      .title { font-family: 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; fill: #333; }      .content { font-family: 'Noto Serif SC', serif; font-size: 18px; fill: #555; }      .divider { stroke: #999; stroke-width: 1; }      .decoration { fill: none; stroke: #999; stroke-width: 1; }    </style>  </defs></svg></lobeArtifact>
+<artifact identifier="ai-new-interpretation" type="image/svg+xml" title="人工智能的新解释"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600">  <defs>    <style>      @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&amp;display=swap');      .background { fill: #f0f0f0; }      .title { font-family: 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; fill: #333; }      .content { font-family: 'Noto Serif SC', serif; font-size: 18px; fill: #555; }      .divider { stroke: #999; stroke-width: 1; }      .decoration { fill: none; stroke: #999; stroke-width: 1; }    </style>  </defs></svg></artifact>
 
 我为"人工智能"这个词创建了一个新的解释,并将其呈现在一个SVG卡片中。这个解释采用了批判性和幽默的视角,试图揭示这个概念背后的一些潜在问题。`);
   });
 
-  it('should removeLinkBreaks for lobeThinking', () => {
-    const input = `<lobeThinking>
+  it('should removeLinkBreaks for thinking', () => {
+    const input = `<thinking>
 这个词汇涉及了
 `;
 
     const output = processWithArtifact(input);
 
-    expect(output).toEqual(`<lobeThinking>这个词汇涉及了`);
+    expect(output).toEqual(`<thinking>这个词汇涉及了`);
   });
 
-  it('should handle no empty line between lobeThinking and lobeArtifact', () => {
-    const input = `<lobeThinking>这是一个思考过程。</lobeThinking>
-<lobeArtifact identifier="test" type="image/svg+xml" title="测试">
+  it('should handle no empty line between thinking and artifact', () => {
+    const input = `<thinking>这是一个思考过程。</thinking>
+<artifact identifier="test" type="image/svg+xml" title="测试">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <rect width="100" height="100" fill="blue"/>
 </svg>
-</lobeArtifact>`;
+</artifact>`;
 
     const output = processWithArtifact(input);
 
-    expect(output).toEqual(`<lobeThinking>这是一个思考过程。</lobeThinking>
+    expect(output).toEqual(`<thinking>这是一个思考过程。</thinking>
 
-<lobeArtifact identifier="test" type="image/svg+xml" title="测试"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">  <rect width="100" height="100" fill="blue"/></svg></lobeArtifact>`);
+<artifact identifier="test" type="image/svg+xml" title="测试"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">  <rect width="100" height="100" fill="blue"/></svg></artifact>`);
   });
 
-  it('should remove fenced code block between lobeArtifact and HTML content', () => {
-    const input = `<lobeArtifact identifier="web-calculator" type="text/html" title="简单的 Web 计算器">
+  it('should remove fenced code block between artifact and HTML content', () => {
+    const input = `<artifact identifier="web-calculator" type="text/html" title="简单的 Web 计算器">
 \`\`\`html
 <!DOCTYPE html>
 <html lang="zh">
@@ -176,17 +176,17 @@ describe('processWithArtifact', () => {
 </body>
 </html>
 \`\`\`
-</lobeArtifact>`;
+</artifact>`;
 
     const output = processWithArtifact(input);
 
     expect(output).toEqual(
-      `<lobeArtifact identifier="web-calculator" type="text/html" title="简单的 Web 计算器"><!DOCTYPE html><html lang="zh"><head>  <title>计算器</title></head><body>  <div>计算器</div></body></html></lobeArtifact>`,
+      `<artifact identifier="web-calculator" type="text/html" title="简单的 Web 计算器"><!DOCTYPE html><html lang="zh"><head>  <title>计算器</title></head><body>  <div>计算器</div></body></html></artifact>`,
     );
   });
 
-  it('should remove fenced code block between lobeArtifact and HTML content without doctype', () => {
-    const input = `<lobeArtifact identifier="web-calculator" type="text/html" title="简单的 Web 计算器">
+  it('should remove fenced code block between artifact and HTML content without doctype', () => {
+    const input = `<artifact identifier="web-calculator" type="text/html" title="简单的 Web 计算器">
 \`\`\`html
 <html lang="zh">
 <head>
@@ -197,43 +197,43 @@ describe('processWithArtifact', () => {
 </body>
 </html>
 \`\`\`
-</lobeArtifact>`;
+</artifact>`;
 
     const output = processWithArtifact(input);
 
     expect(output).toEqual(
-      `<lobeArtifact identifier="web-calculator" type="text/html" title="简单的 Web 计算器"><html lang="zh"><head>  <title>计算器</title></head><body>  <div>计算器</div></body></html></lobeArtifact>`,
+      `<artifact identifier="web-calculator" type="text/html" title="简单的 Web 计算器"><html lang="zh"><head>  <title>计算器</title></head><body>  <div>计算器</div></body></html></artifact>`,
     );
   });
 
-  it('should remove outer fenced code block wrapping lobeThinking and lobeArtifact', () => {
+  it('should remove outer fenced code block wrapping thinking and artifact', () => {
     const input =
-      '```tool_code\n<lobeThinking>这是一个思考过程。</lobeThinking>\n\n<lobeArtifact identifier="test" type="text/html" title="测试">\n<div>测试内容</div>\n</lobeArtifact>\n```';
+      '```tool_code\n<thinking>这是一个思考过程。</thinking>\n\n<artifact identifier="test" type="text/html" title="测试">\n<div>测试内容</div>\n</artifact>\n```';
 
     const output = processWithArtifact(input);
 
     expect(output).toEqual(
-      '<lobeThinking>这是一个思考过程。</lobeThinking>\n\n<lobeArtifact identifier="test" type="text/html" title="测试"><div>测试内容</div></lobeArtifact>',
+      '<thinking>这是一个思考过程。</thinking>\n\n<artifact identifier="test" type="text/html" title="测试"><div>测试内容</div></artifact>',
     );
   });
 
   it('should handle both outer code block and inner HTML code block', () => {
     const input =
-      '```tool_code\n<lobeThinking>这是一个思考过程。</lobeThinking>\n\n<lobeArtifact identifier="test" type="text/html" title="测试">\n```html\n<!DOCTYPE html>\n<html>\n<body>\n<div>测试内容</div>\n</body>\n</html>\n```\n</lobeArtifact>\n```';
+      '```tool_code\n<thinking>这是一个思考过程。</thinking>\n\n<artifact identifier="test" type="text/html" title="测试">\n```html\n<!DOCTYPE html>\n<html>\n<body>\n<div>测试内容</div>\n</body>\n</html>\n```\n</artifact>\n```';
 
     const output = processWithArtifact(input);
 
     expect(output).toEqual(
-      '<lobeThinking>这是一个思考过程。</lobeThinking>\n\n<lobeArtifact identifier="test" type="text/html" title="测试"><!DOCTYPE html><html><body><div>测试内容</div></body></html></lobeArtifact>',
+      '<thinking>这是一个思考过程。</thinking>\n\n<artifact identifier="test" type="text/html" title="测试"><!DOCTYPE html><html><body><div>测试内容</div></body></html></artifact>',
     );
   });
 
   it('should handle complete conversation with text and tags', () => {
     const input = `Sure, I can help you with that! Here is a basic calculator built using HTML, CSS, and JavaScript.
 
-<lobeThinking>A web calculator is a substantial piece of code and a good candidate for an artifact. It's self-contained, and it's likely that the user will want to modify it. This is a new request, so I will create a new artifact.</lobeThinking>
+<thinking>A web calculator is a substantial piece of code and a good candidate for an artifact. It's self-contained, and it's likely that the user will want to modify it. This is a new request, so I will create a new artifact.</thinking>
 
-<lobeArtifact identifier="web-calculator" type="text/html" title="Web Calculator">
+<artifact identifier="web-calculator" type="text/html" title="Web Calculator">
 \`\`\`html
 <!DOCTYPE html>
 <html lang="en">
@@ -246,7 +246,7 @@ describe('processWithArtifact', () => {
 </body>
 </html>
 \`\`\`
-</lobeArtifact>
+</artifact>
 
 This code provides a basic calculator that can perform addition, subtraction, multiplication, and division.`;
 
@@ -255,9 +255,9 @@ This code provides a basic calculator that can perform addition, subtraction, mu
     expect(output)
       .toEqual(`Sure, I can help you with that! Here is a basic calculator built using HTML, CSS, and JavaScript.
 
-<lobeThinking>A web calculator is a substantial piece of code and a good candidate for an artifact. It's self-contained, and it's likely that the user will want to modify it. This is a new request, so I will create a new artifact.</lobeThinking>
+<thinking>A web calculator is a substantial piece of code and a good candidate for an artifact. It's self-contained, and it's likely that the user will want to modify it. This is a new request, so I will create a new artifact.</thinking>
 
-<lobeArtifact identifier="web-calculator" type="text/html" title="Web Calculator"><!DOCTYPE html><html lang="en"><head>    <meta charset="UTF-8">    <title>Simple Calculator</title></head><body>    <div>Calculator</div></body></html></lobeArtifact>
+<artifact identifier="web-calculator" type="text/html" title="Web Calculator"><!DOCTYPE html><html lang="en"><head>    <meta charset="UTF-8">    <title>Simple Calculator</title></head><body>    <div>Calculator</div></body></html></artifact>
 
 This code provides a basic calculator that can perform addition, subtraction, multiplication, and division.`);
   });
@@ -266,68 +266,68 @@ This code provides a basic calculator that can perform addition, subtraction, mu
 describe('outer code block removal', () => {
   it('should remove outer html code block', () => {
     const input = `\`\`\`html
-<lobeThinking>Test thinking</lobeThinking>
-<lobeArtifact identifier="test" type="text/html" title="Test">
+<thinking>Test thinking</thinking>
+<artifact identifier="test" type="text/html" title="Test">
 <!DOCTYPE html>
 <html>
 <body>Test</body>
 </html>
-</lobeArtifact>
+</artifact>
 \`\`\``;
 
     const output = processWithArtifact(input);
 
-    expect(output).toEqual(`<lobeThinking>Test thinking</lobeThinking>
+    expect(output).toEqual(`<thinking>Test thinking</thinking>
 
-<lobeArtifact identifier="test" type="text/html" title="Test"><!DOCTYPE html><html><body>Test</body></html></lobeArtifact>`);
+<artifact identifier="test" type="text/html" title="Test"><!DOCTYPE html><html><body>Test</body></html></artifact>`);
   });
 
   it('should remove outer tool_code code block', () => {
     const input = `\`\`\`tool_code
-<lobeThinking>Test thinking</lobeThinking>
-<lobeArtifact identifier="test" type="text/html" title="Test">
+<thinking>Test thinking</thinking>
+<artifact identifier="test" type="text/html" title="Test">
 <!DOCTYPE html>
 <html>
 <body>Test</body>
 </html>
-</lobeArtifact>
+</artifact>
 \`\`\``;
 
     const output = processWithArtifact(input);
 
-    expect(output).toEqual(`<lobeThinking>Test thinking</lobeThinking>
+    expect(output).toEqual(`<thinking>Test thinking</thinking>
 
-<lobeArtifact identifier="test" type="text/html" title="Test"><!DOCTYPE html><html><body>Test</body></html></lobeArtifact>`);
+<artifact identifier="test" type="text/html" title="Test"><!DOCTYPE html><html><body>Test</body></html></artifact>`);
   });
 
   it('should handle input without outer code block', () => {
-    const input = `<lobeThinking>Test thinking</lobeThinking>
-<lobeArtifact identifier="test" type="text/html" title="Test">
+    const input = `<thinking>Test thinking</thinking>
+<artifact identifier="test" type="text/html" title="Test">
 <!DOCTYPE html>
 <html>
 <body>Test</body>
 </html>
-</lobeArtifact>`;
+</artifact>`;
 
     const output = processWithArtifact(input);
 
-    expect(output).toEqual(`<lobeThinking>Test thinking</lobeThinking>
+    expect(output).toEqual(`<thinking>Test thinking</thinking>
 
-<lobeArtifact identifier="test" type="text/html" title="Test"><!DOCTYPE html><html><body>Test</body></html></lobeArtifact>`);
+<artifact identifier="test" type="text/html" title="Test"><!DOCTYPE html><html><body>Test</body></html></artifact>`);
   });
 
   it('should handle code block with content before and after', () => {
     const input = `Some text before
 
 \`\`\`html
-<lobeThinking>Test thinking</lobeThinking>
+<thinking>Test thinking</thinking>
 
-<lobeArtifact identifier="test" type="text/html" title="Test">
+<artifact identifier="test" type="text/html" title="Test">
 <!DOCTYPE html>
 <html>
 <body>Test</body>
 </html>
-</lobeArtifact>
+</artifact>
 \`\`\`
 
 Some text after`;
@@ -336,41 +336,41 @@ Some text after`;
 
     expect(output).toEqual(`Some text before
 
-<lobeThinking>Test thinking</lobeThinking>
+<thinking>Test thinking</thinking>
 
-<lobeArtifact identifier="test" type="text/html" title="Test"><!DOCTYPE html><html><body>Test</body></html></lobeArtifact>
+<artifact identifier="test" type="text/html" title="Test"><!DOCTYPE html><html><body>Test</body></html></artifact>
 
 Some text after`);
   });
 
-  it('should handle code block with only lobeArtifact tag', () => {
+  it('should handle code block with only artifact tag', () => {
     const input = `\`\`\`html
-<lobeArtifact identifier="test" type="text/html" title="Test">
+<artifact identifier="test" type="text/html" title="Test">
 <!DOCTYPE html>
 <html>
 <body>Test</body>
 </html>
-</lobeArtifact>
+</artifact>
 \`\`\``;
 
     const output = processWithArtifact(input);
 
     expect(output).toEqual(
-      `<lobeArtifact identifier="test" type="text/html" title="Test"><!DOCTYPE html><html><body>Test</body></html></lobeArtifact>`,
+      `<artifact identifier="test" type="text/html" title="Test"><!DOCTYPE html><html><body>Test</body></html></artifact>`,
     );
   });
 
-  it('should handle code block with surrounding text and both lobeThinking and lobeArtifact', () => {
+  it('should handle code block with surrounding text and both thinking and artifact', () => {
     const input = `---
 
 \`\`\`tool_code
-<lobeThinking>The user reported a \`SyntaxError\` in the browser console, indicating a problem with the JavaScript code in the calculator artifact. The error message "Identifier 'display' has already been declared" suggests a variable naming conflict. I need to review the JavaScript code and correct the issue. This is an update to the existing "calculator-web-artifact" artifact.</lobeThinking>
-<lobeArtifact identifier="calculator-web-artifact" type="text/html" title="Simple Calculator">
+<thinking>The user reported a \`SyntaxError\` in the browser console, indicating a problem with the JavaScript code in the calculator artifact. The error message "Identifier 'display' has already been declared" suggests a variable naming conflict. I need to review the JavaScript code and correct the issue. This is an update to the existing "calculator-web-artifact" artifact.</thinking>
+<artifact identifier="calculator-web-artifact" type="text/html" title="Simple Calculator">
 <!DOCTYPE html>
 <html lang="en">
 ...
 </html>
-</lobeArtifact>
+</artifact>
 \`\`\`
 I've updated the calculator artifact. The issue was a naming conflict with the \`display\` variable. I've renamed the input element's ID to \`calc-display\` and the JavaScript variable to \`displayElement\` to avoid the conflict. The calculator should now function correctly.
 
@@ -380,16 +380,16 @@ I've updated the calculator artifact. The issue was a naming conflict with the \
 
     expect(output).toEqual(`---
 
-<lobeThinking>The user reported a \`SyntaxError\` in the browser console, indicating a problem with the JavaScript code in the calculator artifact. The error message "Identifier 'display' has already been declared" suggests a variable naming conflict. I need to review the JavaScript code and correct the issue. This is an update to the existing "calculator-web-artifact" artifact.</lobeThinking>
+<thinking>The user reported a \`SyntaxError\` in the browser console, indicating a problem with the JavaScript code in the calculator artifact. The error message "Identifier 'display' has already been declared" suggests a variable naming conflict. I need to review the JavaScript code and correct the issue. This is an update to the existing "calculator-web-artifact" artifact.</thinking>
 
-<lobeArtifact identifier="calculator-web-artifact" type="text/html" title="Simple Calculator"><!DOCTYPE html><html lang="en">...</html></lobeArtifact>
+<artifact identifier="calculator-web-artifact" type="text/html" title="Simple Calculator"><!DOCTYPE html><html lang="en">...</html></artifact>
 
 I've updated the calculator artifact. The issue was a naming conflict with the \`display\` variable. I've renamed the input element's ID to \`calc-display\` and the JavaScript variable to \`displayElement\` to avoid the conflict. The calculator should now function correctly.
 
 ---`);
   });
 
-  it('should handle code block before lobeThinking and lobeArtifact', () => {
+  it('should handle code block before thinking and artifact', () => {
     const input = `
 Okay, I'll create a temperature converter with the logic wrapped in an IIFE and event listeners attached in Javascript.
 
@@ -400,16 +400,16 @@ Okay, I'll create a temperature converter with the logic wrapped in an IIFE and 
 </html>
 \`\`\`
 
-<lobeThinking>This is a good candidate for an artifact. It's a self-contained HTML document with embedded JavaScript that provides a functional temperature converter. It's more than a simple code snippet and can be reused or modified. This is a new request, so I'll create a new artifact with the identifier "temperature-converter".</lobeThinking>
+<thinking>This is a good candidate for an artifact. It's a self-contained HTML document with embedded JavaScript that provides a functional temperature converter. It's more than a simple code snippet and can be reused or modified. This is a new request, so I'll create a new artifact with the identifier "temperature-converter".</thinking>
 
-<lobeArtifact identifier="temperature-converter" type="text/html" title="Temperature Converter">
+<artifact identifier="temperature-converter" type="text/html" title="Temperature Converter">
 \`\`\`html
 <!DOCTYPE html>
 <html lang="en">
 ...
 </html>
 \`\`\`
-</lobeArtifact>
+</artifact>
 This HTML document includes the temperature converter with the requested features: the logic is wrapped in an IIFE, and event listeners are attached in JavaScript.
 `;
 
@@ -425,9 +425,9 @@ This HTML document includes the temperature converter with the requested feature
 </html>
 \`\`\`
 
-<lobeThinking>This is a good candidate for an artifact. It's a self-contained HTML document with embedded JavaScript that provides a functional temperature converter. It's more than a simple code snippet and can be reused or modified. This is a new request, so I'll create a new artifact with the identifier "temperature-converter".</lobeThinking>
+<thinking>This is a good candidate for an artifact. It's a self-contained HTML document with embedded JavaScript that provides a functional temperature converter. It's more than a simple code snippet and can be reused or modified. This is a new request, so I'll create a new artifact with the identifier "temperature-converter".</thinking>
 
-<lobeArtifact identifier="temperature-converter" type="text/html" title="Temperature Converter"><!DOCTYPE html><html lang="en">...</html></lobeArtifact>
+<artifact identifier="temperature-converter" type="text/html" title="Temperature Converter"><!DOCTYPE html><html lang="en">...</html></artifact>
 
 This HTML document includes the temperature converter with the requested features: the logic is wrapped in an IIFE, and event listeners are attached in JavaScript.`);
   });
