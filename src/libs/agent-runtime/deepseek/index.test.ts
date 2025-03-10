@@ -15,7 +15,7 @@ import { LobeDeepSeekAI } from './index';
 import { LobeOpenAICompatibleFactory } from '../utils/openaiCompatibleFactory';
 
 const provider = ModelProvider.DeepSeek;
-const defaultBaseURL = 'https://api.deepseek.com/v1';
+const defaultBaseURL = 'https://api.deepseek.com/beta';
 
 const bizErrorType = 'ProviderBizError';
 const invalidErrorType = 'InvalidProviderAPIKey';
