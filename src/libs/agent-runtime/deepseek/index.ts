@@ -10,7 +10,7 @@ export interface DeepSeekModelCard {
 }
 
 export const LobeDeepSeekAI = LobeOpenAICompatibleFactory({
-  baseURL: 'https://api.deepseek.com/v1',
+  baseURL: 'https://api.deepseek.com/beta',
   chatCompletion: {
     handlePayload: ({
       frequency_penalty,
