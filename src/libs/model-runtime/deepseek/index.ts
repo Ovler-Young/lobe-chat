@@ -8,7 +8,7 @@ export interface DeepSeekModelCard {
 }
 
 export const LobeDeepSeekAI = createOpenAICompatibleRuntime({
-  baseURL: 'https://api.deepseek.com/v1',
+  baseURL: 'https://api.deepseek.com/beta',
   debug: {
     chatCompletion: () => process.env.DEBUG_DEEPSEEK_CHAT_COMPLETION === '1',
   },
