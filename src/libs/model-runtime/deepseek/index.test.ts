@@ -5,7 +5,7 @@ import { testProvider } from '@/libs/model-runtime/providerTestUtils';
 import { LobeDeepSeekAI } from './index';
 
 const provider = ModelProvider.DeepSeek;
-const defaultBaseURL = 'https://api.deepseek.com/v1';
+const defaultBaseURL = 'https://api.deepseek.com/beta';
 
 testProvider({
   Runtime: LobeDeepSeekAI,
