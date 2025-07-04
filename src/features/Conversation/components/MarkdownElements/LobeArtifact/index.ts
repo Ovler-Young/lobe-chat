@@ -7,7 +7,7 @@ import rehypePlugin from './rehypePlugin';
 const AntArtifactElement: MarkdownElement = {
   Component: Component as unknown as FC<MarkdownElementProps>,
   rehypePlugin,
-  tag: 'lobeArtifact',
+  tag: 'artifact',
 };
 
 export default AntArtifactElement;

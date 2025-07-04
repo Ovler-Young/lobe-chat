@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import rehypePlugin from './rehypePlugin';
 
 describe('rehypePlugin', () => {
-  it('should transform <lobeArtifact> tags with attributes', () => {
+  it('should transform <artifact> tags with attributes', () => {
     const tree = {
       type: 'root',
       children: [
@@ -13,10 +13,10 @@ describe('rehypePlugin', () => {
           children: [
             {
               type: 'raw',
-              value: '<lobeArtifact identifier="test-id" type="image/svg+xml" title="Test Title">',
+              value: '<artifact identifier="test-id" type="image/svg+xml" title="Test Title">',
             },
             { type: 'text', value: 'Artifact content' },
-            { type: 'raw', value: '</lobeArtifact>' },
+            { type: 'raw', value: '</artifact>' },
           ],
         },
       ],
@@ -27,7 +27,7 @@ describe('rehypePlugin', () => {
       children: [
         {
           type: 'element',
-          tagName: 'lobeArtifact',
+          tagName: 'artifact',
           properties: {
             identifier: 'test-id',
             type: 'image/svg+xml',
@@ -57,9 +57,9 @@ describe('rehypePlugin', () => {
           type: 'element',
           tagName: 'p',
           children: [
-            { type: 'raw', value: '<lobeThinking>' },
+            { type: 'raw', value: '<thinking>' },
             { type: 'text', value: 'AI is thinking...' },
-            { type: 'raw', value: '</lobeThinking>' },
+            { type: 'raw', value: '</thinking>' },
           ],
         },
         {
@@ -68,10 +68,10 @@ describe('rehypePlugin', () => {
           children: [
             {
               type: 'raw',
-              value: '<lobeArtifact identifier="test-id" type="image/svg+xml" title="Test Title">',
+              value: '<artifact identifier="test-id" type="image/svg+xml" title="Test Title">',
             },
             { type: 'text', value: 'Artifact content' },
-            { type: 'raw', value: '</lobeArtifact>' },
+            { type: 'raw', value: '</artifact>' },
           ],
         },
         {
@@ -94,14 +94,14 @@ describe('rehypePlugin', () => {
           type: 'element',
           tagName: 'p',
           children: [
-            { type: 'raw', value: '<lobeThinking>' },
+            { type: 'raw', value: '<thinking>' },
             { type: 'text', value: 'AI is thinking...' },
-            { type: 'raw', value: '</lobeThinking>' },
+            { type: 'raw', value: '</thinking>' },
           ],
         },
         {
           type: 'element',
-          tagName: 'lobeArtifact',
+          tagName: 'artifact',
           properties: {
             identifier: 'test-id',
             type: 'image/svg+xml',

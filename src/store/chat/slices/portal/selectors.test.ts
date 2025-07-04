@@ -154,7 +154,7 @@ describe('chatDockSelectors', () => {
           'test-id_null': [
             {
               id: 'test-id',
-              content: `<lobeArtifact type="text">${artifactContent}</lobeArtifact>`,
+              content: `<artifact type="text">${artifactContent}</artifact>`,
               createdAt: Date.now(),
               updatedAt: Date.now(),
               role: 'user',
@@ -182,11 +182,11 @@ describe('chatDockSelectors', () => {
           'test-id_null': [
             {
               id: 'test-id',
-              content: `<lobeArtifact type="text/html">
+              content: `<artifact type="text/html">
 \`\`\`html
 ${htmlContent}
 \`\`\`
-</lobeArtifact>`,
+</artifact>`,
               createdAt: Date.now(),
               updatedAt: Date.now(),
               role: 'user',
@@ -207,7 +207,7 @@ ${htmlContent}
           'test-id_null': [
             {
               id: 'test-id',
-              content: '<lobeArtifact type="text">Test content',
+              content: '<artifact type="text">Test content',
               createdAt: Date.now(),
               updatedAt: Date.now(),
               role: 'user',
@@ -226,7 +226,7 @@ ${htmlContent}
           'test-id_null': [
             {
               id: 'test-id',
-              content: '<lobeArtifact type="text">Test content</lobeArtifact>',
+              content: '<artifact type="text">Test content</artifact>',
               createdAt: Date.now(),
               updatedAt: Date.now(),
               role: 'user',

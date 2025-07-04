@@ -8,7 +8,7 @@ function rehypeAntArtifact() {
       if (node.type === 'element' && node.tagName === 'p' && node.children.length > 0) {
         const firstChild = node.children[0];
         if (firstChild.type === 'raw' && firstChild.value.startsWith(`<${ARTIFACT_TAG}`)) {
-          // 提取 lobeArtifact 的属性
+          // 提取 artifact 的属性
           const attributes: Record<string, string> = {};
           const attributeRegex = /(\w+)="([^"]*)"/g;
           let match;
@@ -16,7 +16,7 @@ function rehypeAntArtifact() {
             attributes[match[1]] = match[2];
           }
 
-          // 创建新的 lobeArtifact 节点
+          // 创建新的 artifact 节点
           const newNode = {
             children: [
               {
@@ -47,15 +47,15 @@ function rehypeAntArtifact() {
           return [SKIP, index];
         }
       }
-      // 如果字符串是 <lobeArtifact identifier="ai-new-interpretation" type="image/svg+xml" title="人工智能新解释">
+      // 如果字符串是 <artifact identifier="ai-new-interpretation" type="image/svg+xml" title="人工智能新解释">
       // 得到的节点就是：
       // {
       //   type: 'raw',
       //   value:
-      //     '<lobeArtifact identifier="ai-new-interpretation" type="image/svg+xml" title="人工智能新解释">',
+      //     '<artifact identifier="ai-new-interpretation" type="image/svg+xml" title="人工智能新解释">',
       // }
       else if (node.type === 'raw' && node.value.startsWith(`<${ARTIFACT_TAG}`)) {
-        // 创建新的 lobeArtifact 节点
+        // 创建新的 artifact 节点
         const newNode = {
           children: [],
           properties: {},
